@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on Bogdan Radu</title>
+    <link>https://radu-bogdan.github.io/</link>
+    <description>Recent content in About on Bogdan Radu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://radu-bogdan.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://radu-bogdan.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radu-bogdan.github.io/about/</guid>
+      <description>About Me  I am a PostDoc at the Radon instutute for computational and applied mathematics (RICAM) in Linz, Austria.
+I received my PhD in applied mathematics from TU Darmstadt on &amp;ldquo;Finite element mass lumping for H(div) and H(curl)&amp;quot; under the supervision of Prof. Dr. Herbert Egger.
+Research Interest I am an expert in finite element methods with mass lumping. More details to follow ;)
+Preprints  H.Egger, B.Radu : A Yee-like finite element scheme for Maxwell&amp;rsquo;s equations on hybrid grids, arXiv 2022  Publications In reverse chronological order:</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://radu-bogdan.github.io/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radu-bogdan.github.io/contact/</guid>
+      <description> Email: bogdan.radu(at)ricam.oeaw.ac.at  bogdan.radu(at)ricam.oeaw.ac.at --  221B, Baker Street   London   United Kingdoms --    </description>
+    </item>
+    
+  </channel>
+</rss>
