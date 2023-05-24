@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title></title>
+    <meta name="description" content="Bogdan Radu&#39;s website">
+    <meta name="author" content='Bogdan Radu'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    
+
+
+
+    
+    <script defer language="JavaScript" type="text/javascript" src="/js/unCryptMail.min.js" ></script>
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://www.radubogdan.de/favicon.png">
+    
+
+    
+        
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JCGFL1PW6"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-9JCGFL1PW6', { 'anonymize_ip': false });
+}
+</script>
+
+    
+</head>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js" integrity="sha384-Qsn9KnoKISj6dI8g7p1HBlNpVx0I8p1SvlwOldgi3IorMle61nQy4zEahWYtljaz" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://www.radubogdan.de" title="Bogdan Radu">
+          
+          Bogdan Radu
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="maxwell-stress-tensor-derivation">Maxwell stress tensor derivation</h1>
+<h3 id="notation">Notation</h3>
+<p>Let $\widehat\Omega\subseteq\mathbb{R}^3$ be a reference domain
+comprised of points denoted by $\widehat{x}\in\widehat{\Omega}$.
+Further, we define a placement mapping
+$\widehat{p}:\mathbb{R}^+\times \widehat{\Omega}\to \mathbb{R}^3$,
+$x:=x(s):= \widehat{p}(s,\widehat{x})$ and a sequence of domains</p>
+<p>$$\begin{aligned}
+\Omega(s) = {x = \widehat{p}(s,\widehat{x}), \forall,\widehat{x}\in\widehat{\Omega}}\end{aligned}$$</p>
+<p>We choose $\widehat{p}$ such that $\Omega(0)=\widehat{\Omega}$, i.e.
+$\widehat{x}= \widehat{p}(0,\widehat{x})$. The inverse of $\widehat{p}$
+we denote by $p^{-1}:\mathbb{R}\times \Omega(s)\to \widehat{\Omega}$ via
+$\widehat{x}= p^{-1}(s,x)$. We also write
+$\widehat{F}(s,\widehat{x}) = \widehat D_{\widehat{x}}\widehat{p}(s,\widehat{x})$
+for the jacobian of $\widehat{p}$, aka the deformation gradient, as well
+as $\widehat{J}(s,\widehat{x}) = \det \widehat{F}(s,\widehat{x})$ for
+the functional determinant. Since $\widehat{p}$ is invertible at every
+point, by the chain rule/implicit function theorem, we have</p>
+<p>$$\begin{aligned}
+D_x p^{-1}(s,x) = (\widehat{D}_{\widehat{x}} \widehat{p}(s,\widehat{x}))^{-1} =  \widehat{F}(s,\widehat{x})^{-1}\end{aligned}$$</p>
+<p>Also, let
+$v(s,x) := \widehat{v}(s,\widehat{x}) := \partial_{s}\widehat{p}(s,\widehat{x})=x'(s)$.
+Then</p>
+<p>$$\begin{aligned}
+D_x v(s,x) &amp;= D_x (\widehat{v}(s,p^{-1}(s,x)) = \widehat{D}_{\widehat{x}} \widehat{v}(s,\widehat{x})D_x p^{-1}(s,x)  \\
+&amp;= \widehat{D}_{\widehat{x}} \widehat{v}(s,\widehat{x})(\widehat{D}_{\widehat{x}} \widehat{p}(s,\widehat{x}))^{-1}= \partial_{s}\widehat{F}(s,\widehat{x}) \widehat{F}(s,\widehat{x})^{-1}\quad\text{and} \\
+\partial_{s}\widehat{J}(s,\widehat{x}) &amp;= \widehat{J}(s,\widehat{x})\text{div}_x v(s,x)
+\end{aligned}$$</p>
+<p>The second formula follows from Jacobi&rsquo;s formula, see the appendix in
+the end. Also, for vectors $h$ and $b$, we have</p>
+<p>$$\begin{aligned}
+h\cdot (D_x v)b = \sum_j h_j\sum_i b_i \partial_{i}v_j = (h\otimes b):D_xv = (b\otimes h):\nabla_x v\end{aligned}$$</p>
+<h3 id="reynolds-transport-theorem-for-a-standard-density">Reynolds transport theorem for a standard density</h3>
+<p>Before we begin, let us briefly recall the proof of the Reynolds
+transport theorem. Let
+$\widehat\rho:\mathbb{R}^+\times\widehat{\Omega}\to\mathbb{R}$ be a
+given density and we let $\rho:\mathbb{R}^+\times\Omega(s)\to\mathbb{R}$
+with</p>
+<p>$$\begin{aligned}
+\rho(s,x):=\frac1{\widehat{J}(s,\widehat{x})}\widehat\rho(s,\widehat{x})\end{aligned}$$</p>
+<p>Then the derivative satisfies</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\widehat\rho(s,\widehat{x}) &amp;= \frac{d}{ds}\Big(\rho(s,x)\widehat{J}(s,\widehat{x})\Big)
+=\frac{d}{ds}\rho(s,x)\widehat{J}(s,\widehat{x}) + \rho(s,x)\partial_{s}\widehat{J}(s,\widehat{x}) \\
+&amp;= \Big(\partial_{s}\rho(s,x) + \nabla_x \rho(s,x)\cdot x'(s) + \rho(s,x)\cdot \text{div}_x v(s,x) \Big)\widehat{J}(s,\widehat{x}) \\
+&amp;= \Big(\partial_{s}\rho(s,x) + \nabla_x \rho(s,x)\cdot v(s,x) + \rho(s,x)\cdot \text{div}_x v(s,x) \Big)\widehat{J}(s,\widehat{x})\end{aligned}$$</p>
+<p>by employing the product and chain rule. Then</p>
+<p>$$\begin{aligned}
+&amp;\frac{d}{ds}\int_{\Omega(s)}\rho(s,x),dx =  \int_{\widehat{\Omega}}\frac{d}{ds}\widehat\rho(s,\widehat{x}),d\widehat{x}\\
+&amp;=\int_{\widehat{\Omega}}\Big(\partial_{s}\rho(s,x) + \nabla_x \rho(s,x)\cdot v(s,x) + \rho(s,x)\cdot \text{div}_x v(s,x) \Big)\widehat{J}(s,\widehat{x}),d\widehat{x}\\
+&amp;=\int_{\Omega(s)}\partial_{s}\rho(s,x) + \nabla_x \rho(s,x)\cdot v(s,x) + \rho(s,x)\cdot \text{div}_x v(s,x),dx\end{aligned}$$</p>
+<p>or without arguments in compact form:</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\int_{\Omega(s)}\rho = \int_{\Omega(s)}\partial_{s}\rho + \nabla_x\rho\cdot v + \rho\text{div}_x v\end{aligned}$$</p>
+<p>which is the known result. Easy, right?</p>
+<h3 id="energy-densities-in-magnetostatics">Energy densities in magnetostatics</h3>
+<p>Unlike the energy density $\rho$ defined above, the energy densities for
+the magnetostatic problem depend additionally on the $a$ and $b$ fields.
+We use red color to emphasize the additional dependencies in the
+following. Let
+$\widehat\rho:\textcolor{red}{\mathbb{R}^3}\times\mathbb{R}^+\times\widehat{\Omega}\to\mathbb{R}$
+on the reference configuration be given. We then define the displaced energy density
+$\rho:\textcolor{red}{\mathbb{R}^3}\times \mathbb{R}^+\times \Omega(s) \to \mathbb{R}$ by</p>
+<p>$$\begin{aligned}
+\rho(\textcolor{red}{b},s,x):= \frac{1}{\widehat{J}(s,\widehat{x})}\widehat\rho\left(\textcolor{red}{\frac{1}{\widehat{J}(s,\widehat{x})}\widehat{F}(s,\widehat{x}),\widehat{b}},s,\widehat{x}\right)\end{aligned}$$</p>
+<p>In a similar fashion, we define
+$\eta:\textcolor{red}{\mathbb{R}^3}\times \mathbb{R}^+\times \Omega(s) \to \mathbb{R}$
+and $\widehat\eta:\textcolor{red}{\mathbb{R}^3}\times \mathbb{R}^+\times\widehat{\Omega}\to\mathbb{R}$ by</p>
+<p>$$\begin{aligned}
+\eta(\textcolor{red}{a},s,x):= \frac{1}{\widehat{J}(s,\widehat{x})}\widehat\eta\left(\textcolor{red}{\widehat{F}(s,\widehat{x})^{-\top}\widehat{a}},s,\widehat{x}\right)\end{aligned}$$</p>
+<h3 id="piola-transformations-and-implications">Piola transformations and implications</h3>
+<p>Let $\widehat{b}:\mathbb{R}^+\times\widehat{\Omega}\to\mathbb{R}^3$ and
+$\widehat{a}:\mathbb{R}^+\times\widehat{\Omega}\to\mathbb{R}$ be given
+vector and scalar fields on the reference configuration, respectively.
+We then define $b:\mathbb{R}^+\times \Omega(s) \to \mathbb{R}^3$ and
+$a:\mathbb{R}^+\times \Omega(s) \to \mathbb{R}$ satisfying</p>
+<p>$$\begin{aligned}
+b(s,x) := \frac{1}{\widehat{J}(s,\widehat{x})}\widehat{F}(s,\widehat{x})\widehat{b}(s,\widehat{x}) \qquad\text{and}\qquad
+a(s,x) := \widehat{F}(s,\widehat{x})^{-\top} \widehat{a}(s,\widehat{x})\end{aligned}$$</p>
+<p>which follows from the corresponding Piola transformations for
+$H(\text{div})$ and $H(\text{curl})$. In particular,
+this implies that the derivatives satisfy the following:</p>
+<p>$$\begin{aligned}
+&amp;\frac{d}{ds}b(s,x) = \frac{d}{ds}\left(\frac1{\widehat{J}(s,\hat x)}\widehat{F}(s,x)\widehat{b}(s,\widehat{x})\right)\\
+&amp;=\partial_{s}(\widehat{J}(s,\widehat{x})^{-1})\widehat{F}(s,\widehat{x})\widehat{b}(s,\widehat{x}) + \widehat{J}(s,\widehat{x})^{-1}\partial_{s}\widehat{F}(s,\widehat{x})\widehat{b}(s,\widehat{x}) + \widehat{J}(s,\widehat{x})^{-1} \widehat{F}(s,\widehat{x})\partial_{s}\widehat{b}(s,\widehat{x})\\
+&amp;=(1)+(2)+(3)\end{aligned}$$</p>
+<p>where</p>
+<p>$$\begin{aligned}
+(1) &amp;=-\widehat{J}(s,\widehat{x})^{-1}\partial_{s}\widehat{J}(s,\widehat{x}) \widehat{J}(s,\widehat{x})^{-1} \widehat{F}(s,\widehat{x})\widehat{b}(s,\widehat{x}) = - b(s,x)\text{div}_x v(s,x) \\
+(2) &amp; = \widehat{J}(s,\widehat{x})^{-1}\partial_{s}\widehat{F}(s,\widehat{x})\widehat{F}(s,\widehat{x})^{-1}\widehat{F}(s,\widehat{x})\widehat{b}(s,\widehat{x}) = D_x v(s,x) b(s,x)\\
+(3) &amp;= \partial_{s}b(s,x)\end{aligned}$$</p>
+<p>from which we infer that</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}b(s,x) = -b(s,x)\text{div}_x v(s,x) + D_x v(s,x) b(s,x) + \partial_{s}b(s,x)\end{aligned}$$</p>
+<p>Similarly, we derive</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}a(s,x) &amp;= \frac{d}{ds}\left(\widehat{F}(s,x)^{-\top}\widehat{a}(s,\widehat{x})\right) \\
+&amp;= \partial_{s}(\widehat{F}(s,x)^{-\top})\widehat{a}(s,\widehat{x}) + \widehat{F}(s,x)^{-\top}\partial_{s}\widehat{a}(s,\widehat{x})\\
+&amp;=-\widehat{F}(s,\widehat{x})^{-\top}\partial_{s}\widehat{F}(s,\widehat{x})^{\top} \widehat{F}(s,\widehat{x})^{-\top}\widehat{a}(s,\widehat{x}) + \widehat{F}(s,x)^{-\top}\partial_{s}\widehat{a}(s,\widehat{x}) \\
+&amp;= -D_x v(s,x)^\top a(s,x) + \partial_{s}a(s,x)\end{aligned}$$</p>
+<h3 id="differentiating-the-energy-densities">Differentiating the energy densities</h3>
+<p>Again, we use red to emphasize the additional terms we get in comparison
+to the standard transport theorem. We have</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\widehat\rho\Big(&amp;\textcolor{red}{\frac{1}{\widehat{J}(s,\widehat{x})}\widehat{F}(s,\widehat{x}),\widehat{b}(s,\widehat{x})},s,\widehat{x}\Big)= \frac{d}{ds}\Big(\rho(\textcolor{red}{b(s,x)},s,x)\widehat{J}(s,\widehat{x})\Big) \\
+&amp;=\frac{d}{ds}\rho(\textcolor{red}{b(s,x)},s,x)\widehat{J}(s,\widehat{x}) + \rho(\textcolor{red}{b(s,x)},s,x)\partial_{s}\widehat{J}(s,\widehat{x})\\
+&amp;= \Big(\textcolor{red}{\partial_{b}\rho\cdot\frac{d}{ds}b(s,x(s))} + \partial_{s}\rho + \nabla_x \rho\cdot v + \rho\cdot \text{div}_x v \Big)\widehat{J}(s,\widehat{x}) = (\star)\cdot\widehat{J}(s,\widehat{x})\end{aligned}$$</p>
+<p>where we see that we only get one additional term to differentiate.
+Plugging in the term we derived in the previous section gives</p>
+<p>$$\begin{aligned}
+(\star) &amp;= \textcolor{red}{\partial_{b}\rho\cdot(-b\text{div}_x v + (D_xv) b + \partial_{s}b)} + \partial_{s}\rho + \nabla_x \rho\cdot v + \rho\cdot \text{div}_x v \\
+&amp;=(\rho -\textcolor{red}{\partial_{b}\rho\cdot b})\mathbb{I}:\nabla_x v + \textcolor{red}{\partial_{b}\rho\cdot(D_xv) b} + \textcolor{red}{\partial_{b}\rho\cdot\partial_{s}b} + \partial_{s}\rho + \nabla_x \rho\cdot v \\
+&amp;=\Big((\rho -\textcolor{red}{\partial_{b}\rho\cdot b})\mathbb{I} + \textcolor{red}{b\otimes \partial_{b}\rho} \Big):\nabla_x v  + \textcolor{red}{\partial_{b}\rho\cdot\partial_{s}b} + \partial_{s}\rho + \nabla_x \rho\cdot v\end{aligned}$$</p>
+<p>Similarly, we get</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\widehat\eta\left(\textcolor{red}{\widehat{F}(s,\widehat{x})^{-\top}\widehat{a}},s,\widehat{x}\right) &amp;=\Big(\textcolor{red}{\partial_{a}\eta\cdot\frac{d}{ds}a(s,x(s))} + \partial_{s}\eta + \nabla_x \eta\cdot v + \eta\cdot \text{div}_x v \Big)\widehat{J}(s,\widehat{x}) = (\dagger)\cdot \widehat{J}(s,\widehat{x})\end{aligned}$$</p>
+<p>where</p>
+<p>$$\begin{aligned}
+(\dagger) &amp;= \Big(\eta\mathbb{I} - \textcolor{red}{\partial_{a}\eta\otimes a} \Big):\nabla_x v  + \textcolor{red}{\partial_{a}\eta\cdot\partial_{s}a} + \partial_{s}\eta + \nabla_x \eta\cdot v\end{aligned}$$</p>
+<h3 id="energy-and-its-minimizers">Energy and its minimizers</h3>
+<p>From the above densities, we define the energy functional</p>
+<p>$$\begin{aligned}
+E(a,s) = \int_{\Omega(s)}\rho(b(s,x),s,x),dx-\int_{\Omega(s)}\eta(a(s,x),s,x),dx := E_\rho(b,s) - E_\eta(a,s)\end{aligned}$$</p>
+<p>where $b(s,x)=\text{curl}_x a(s,x)$. For any fixed $s = s^*$, we choose</p>
+<p>$$\begin{aligned}
+a^* = \text{argmin}_{a}E(a,s^*)\qquad\text{with}\qquad b^*=\text{curl}a^*\end{aligned}$$</p>
+<p>Then, for the directional derivative</p>
+<p>$$\begin{aligned}
+\nabla_w^a E(a,s):=\lim_\lambda\frac1\lambda(E(a+\lambda w,s)-E(a,s))\end{aligned}$$</p>
+<p>we have that</p>
+<p>$$\begin{aligned}
+0 = \nabla_w^a E(a^*,s^*)= \int_{\Omega(s)}\partial_{b}\rho\cdot \text{curl}w-\partial_{a}\eta\cdot w\end{aligned}$$</p>
+<p>where of course $\partial_{b}\rho=\partial_{b}\rho(b^*(s^*,x),s^*,x)$
+and $\partial_{a}\eta=\partial_{a}\eta(a^*(s^*,x),s^*,x)$. Thus, $a^*$
+is the solution to the corresponding variational problem. Later on, on
+the discrete level, $a^*_h$ will be our finite element solution.</p>
+<h3 id="energy-derivatives">Energy derivatives</h3>
+<p>Plugging in our optimum $a^*$ (and the derived $b^*$) and
+differentiating w.r.t. $s$ yields</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}E_\rho(b^*,s) &amp;= \frac{d}{ds}\int_{\Omega(s)}\rho(b^*(s,x),s,x),dx \\
+&amp; = \int_{\widehat{\Omega}} \frac{d}{ds}\widehat\rho\left(\frac{1}{\widehat{J}(s,\widehat{x})}\widehat{F}(s,\widehat{x}),\widehat{b}^*(s,\widehat{x}),s,\widehat{x}\right),d\widehat{x}= \int_{\widehat{\Omega}} (\star)\widehat{J}(s,\widehat{x}),d\widehat{x}\\
+&amp; = \int_{\Omega(s)} \Big((\rho -\partial_{b}\rho\cdot b^*)\mathbb{I} + b^*\otimes \partial_{b}\rho\Big):\nabla_x v  + \partial_{b}\rho\cdot\partial_{s}b^* + \partial_{s}\rho + \nabla_x \rho\cdot v ,dx(s)\end{aligned}$$</p>
+<p>Similarly, we obtain</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}E_\eta(a^*,s) &amp;= \int_{\Omega(s)} \Big(\eta\mathbb{I} - \partial_{a}\eta\otimes a^* \Big):\nabla_x v  + \partial_{a}\eta\cdot\partial_{s}a^* + \partial_{s}\eta + \nabla_x \eta\cdot v,dx(s)\end{aligned}$$</p>
+<p>Altogether, we have</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}E(a^*,s) &amp;= \int_{\Omega(s)}\Big(\rho - \partial_{b}\rho\cdot b^* - \eta\Big)\mathbb{I}:\nabla_x v(s,x) + \int_{\Omega(s)} (b^*\otimes \partial_{b}\rho + \partial_{a}\eta\otimes a^*):\nabla_x v(s,x) \\
+&amp;+\int_{\Omega(s)} \partial_{s}\rho -\partial_{s}\eta + \int_{\Omega(s)}(\nabla_x\rho-\nabla_x\eta)\cdot v
++\int_{\Omega(s)} \partial_{b}\rho\cdot\partial_{s}b^* - \partial_{a}\eta\cdot\partial_{s}a^*\end{aligned}$$</p>
+<p>The last term vanishes now since $a^*$ is the optimizer, see the
+previous section for $w:=a^*$.</p>
+<h1 id="force-and-torque">Force and torque</h1>
+<p>In the following, $\widehat P$ denotes the power (Leistung), i.e. the
+force applied by the vector field $\widehat{v}$. By <strong>definition</strong>, we
+have</p>
+<p>$$\begin{aligned}
+\widehat P(\widehat{v}):=\frac{d}{ds}E(a^*,s^*)\Big|_{s^*=0}  &amp;= \int_{\widehat{\Omega}}\Big(\widehat\rho - \partial_{b}\widehat\rho\cdot \widehat{b}^* - \widehat\eta\Big)\mathbb{I}:\nabla_{\widehat{x}} \widehat{v}(\widehat{x}),d\widehat{x}\\
+&amp;+ \int_{\widehat{\Omega}} (\widehat{b}^*\otimes \partial_{b}\widehat\rho + \partial_{a}\widehat\eta\otimes \widehat{a}^*):\nabla_{\widehat{x}} \widehat{v}(\widehat{x}),d\widehat{x}\\
+&amp;+\int_{\widehat{\Omega}} \Big(\partial_{s}\widehat\rho -\partial_{s}\widehat\eta\Big) ,d\widehat{x}
++\int_{\Omega(s)}(\nabla_x\widehat\rho-\nabla_x\widehat\eta)\cdot v,d\widehat{x}\end{aligned}$$</p>
+<p>where $\widehat{v}(\widehat{x})=\widehat{v}(0,\widehat{x})$,
+$\widehat\rho = \widehat\rho(\widehat{b}^*,\widehat{x}) = \rho(\widehat{b}^*(0,x),x,0)$,
+$\widehat\eta = \widehat\eta(\widehat{a}^*,\widehat{x}) = \eta(\widehat{a}^*(0,x),x,0)$,
+and so on. For computing the torque, we choose a special velocity field</p>
+<p>$$\begin{aligned}
+\widehat{v}_\omega(\widehat{x}) := \begin{cases}
+\omega\times \widehat r(\widehat{x}) \text{ in the rotor} \\
+(\omega\times \widehat r(\widehat{x}))\gamma \text{ in between}\\
+0\text{ in the stator}
+\end{cases}
+\end{aligned}$$</p>
+<p>for a fixed angular velocity $\omega$ and a
+continuous function $\gamma$ that is $1$ on the rotor boundary and $0$
+on the stator boundary. This ensures that
+$\nabla_{\widehat{x}} \widehat{v}(\widehat{x})$ exists, at least in a
+weak sense. Then the total torque $T$ is <strong>defined</strong> (implicitly) by</p>
+<p>$$\begin{aligned}
+T\cdot \omega = \widehat P(\widehat{v}_\omega)\end{aligned}$$</p>
+<p>Since both
+torque and angular velocity point in the same direction, we have that</p>
+<p>$$\begin{aligned}
+|T| = |\omega|^{-1}\widehat P(\widehat{v}_\omega)\end{aligned}$$</p>
+<p>which we use for computation.</p>
+<h3 id="example">Example</h3>
+<p>If the material law is linear, then</p>
+<p>$$\begin{aligned}
+\widehat\rho(\widehat{b}^*,0,\widehat{x}) = \frac1{2\mu}|\widehat{b}^*|^2, \qquad \widehat\eta(\widehat{a}^*,0,\widehat{x}) = 0\end{aligned}$$</p>
+<p>from which it follows that $\nabla_{\widehat{x}}\widehat\rho$,
+$\partial_{s}\widehat\rho$, $\widehat\eta$,
+$\nabla_{\widehat{x}}\widehat\eta$, $\partial_{s}\widehat\eta$ and
+$\partial_{a}\widehat\eta$ vanish,
+$\partial_{b}\widehat\rho = \frac1\mu \widehat{b}^* =: \widehat{h}^*$,
+and</p>
+<p>$$\begin{aligned}
+|T||\omega| &amp;= \int_{\widehat{\Omega}}\Big(\widehat\rho - \widehat{h}\cdot \widehat{b}\Big)\mathbb{I}:\nabla_{\widehat{x}} \widehat{v}_\omega(\widehat{x}) + \int_{\widehat{\Omega}} (\widehat{b}\otimes \widehat{h}):\nabla_{\widehat{x}} \widehat{v}_\omega(\widehat{x})\end{aligned}$$</p>
+<p>which is the &quot;standard&quot; stress tensor we know. If, for example,
+$\mu=\mu(\widehat{x})$, then we additionally get</p>
+<p>$$\begin{aligned}
+|T||\omega| \mathrel{{+}{=}} \int_{\widehat{\Omega}} \nabla_x\widehat\rho\cdot v\end{aligned}$$</p>
+<p>and so on &hellip;</p>
+<h3 id="appendix-jacobis-formula">Appendix: Jacobi&rsquo;s formula</h3>
+<p>Introduce the directional derivative</p>
+<p>$$\begin{aligned}
+\nabla_T \det(A):=\lim_\lambda \frac{1}{\lambda}\Big(\det(A+\lambda T)-\det(A)\Big)    \end{aligned}$$</p>
+<p>Clearly, by division, we have
+$\nabla_T\det(A) = \det(A)\nabla_{TA^{-1}}\det(AA^{-1}) = \det(A)\nabla_{TA^{-1}}\det(\mathbb{I})$.
+Also, one can verify by Taylor expansion that</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\det(A(s)) = \partial_{s}\det(A(s))\partial_{s}A(s) = \nabla_{\partial_{s}A(s)}\det(A(s))\end{aligned}$$</p>
+<p>Moreover, by observing how the terms in the determinant formula group,
+we see that</p>
+<p>$$\begin{aligned}
+\det(\mathbb{I}+\lambda T) = \prod_i (1+\lambda\cdot T_{ii}) + O(\lambda^2) =1+\lambda\cdot\text{tr}(T) + O(\lambda^2)\end{aligned}$$</p>
+<p>from which we infer that
+$\nabla_T\det(\mathbb{I}) = \text{tr}(T)$, again, by employing
+the Taylor expansion. Thus</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\det(A(s)) &amp;= \nabla_{\partial_{s}A(s)}\det(A(s)) = \det(A(s))\nabla_{\partial_{s}A(s)A^{-1}(s)}\det(\mathbb{I}) \\
+&amp;=\det(A(s))\text{tr}\Big({\partial_{s}A(s)A^{-1}(s)}\Big)\end{aligned}$$</p>
+<p>In our case, where $\widehat{J}(s,\widehat{x}) = \det A(s)$ and
+$A(s)=\widehat{F}(s,\widehat{x})$, we have</p>
+<p>$$\begin{aligned}
+\text{tr}\Big({\partial_{s}A(s)A^{-1}(s)}\Big) = \text{tr}\Big({\partial_{s}\widehat{F}(s,\widehat{x})\widehat{F}(s,\widehat{x})^{-1}}\Big) = \text{tr}\Big(D_x v(s,x)\Big) = \text{div}_x v(s,x)\end{aligned}$$</p>
+<p>from which we ultimately derive that</p>
+<p>$$\begin{aligned}
+\frac{d}{ds}\widehat{J}(s,\widehat{x}) = \widehat{J}(s,\widehat{x})\cdot \text{div}_x v(s,x)\end{aligned}$$</p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    <hr>
+    <div class="container text-center">
+        
+            
+                <a href= "javascript:linkTo_UnCryptMailto('nbjmup;cphebo/sbevAsjdbn/pfbx/bd/bu');" class="fas fa-envelope fa-1x" title="E-mail"></a>
+            
+        
+        
+            
+                <a href= "https://github.com/radu-bogdan" class="fab fa-github fa-1x" title="GitHub"></a>
+            
+                <a href= "https://scholar.google.com/citations?user=R7XQftYAAAAJ" class="fab fa-google fa-1x" title="Google Scholar"></a>
+            
+        
+    </div>
+    
+</div>
+</body>
+</html>
