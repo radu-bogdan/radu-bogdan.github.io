@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bogdan Radu</title>
+    <title>Dr. Bogdan Radu on Bogdan Radu</title>
     <link>https://www.radubogdan.de/</link>
-    <description>Recent content on Bogdan Radu</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Dr. Bogdan Radu on Bogdan Radu</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="https://www.radubogdan.de/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title></title>
-      <link>https://www.radubogdan.de/maxwell/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://www.radubogdan.de/maxwell/</guid>
-      <description>Maxwell stress tensor derivation Notation Let $\widehat\Omega\subseteq\mathbb{R}^3$ be a reference domain comprised of points denoted by $\widehat{x}\in\widehat{\Omega}$. Further, we define a placement mapping $\widehat{p}:\mathbb{R}^+\times \widehat{\Omega}\to \mathbb{R}^3$, $x:=x(s):= \widehat{p}(s,\widehat{x})$ and a sequence of domains&#xA;$$\begin{aligned} \Omega(s) = {x = \widehat{p}(s,\widehat{x}), \forall,\widehat{x}\in\widehat{\Omega}}\end{aligned}$$&#xA;We choose $\widehat{p}$ such that $\Omega(0)=\widehat{\Omega}$, i.e. $\widehat{x}= \widehat{p}(0,\widehat{x})$. The inverse of $\widehat{p}$ we denote by $p^{-1}:\mathbb{R}\times \Omega(s)\to \widehat{\Omega}$ via $\widehat{x}= p^{-1}(s,x)$. We also write $\widehat{F}(s,\widehat{x}) = \widehat D_{\widehat{x}}\widehat{p}(s,\widehat{x})$ for the jacobian of $\widehat{p}$, aka the deformation gradient, as well as $\widehat{J}(s,\widehat{x}) = \det \widehat{F}(s,\widehat{x})$ for the functional determinant.</description>
-    </item>
-    <item>
-      <title>Dr. Bogdan Radu</title>
-      <link>https://www.radubogdan.de/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://www.radubogdan.de/</guid>
-      <description>About Me I am a PostDoc at the Radon institute for computational and applied mathematics (RICAM) in Linz, Austria.&#xA;I received my PhD in applied mathematics from TU Darmstadt on &amp;ldquo;Finite element mass lumping for H(div) and H(curl)&amp;rdquo; under the supervision of Prof. Dr. Herbert Egger.&#xA;Research Interest I am an expert in finite element methods with mass lumping, where one seeks to replace the mass matrix $M$ by a suitable (block)diagonal approximation $M_h$ in the context of wave propagation problems.</description>
-    </item>
   </channel>
 </rss>
