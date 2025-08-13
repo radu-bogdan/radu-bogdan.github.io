@@ -1,0 +1,1 @@
+import{aW as e,a_ as a}from"./index-T_90fFyv.js";var t,r;function o(){return r||(r=1,t=e()),t}var s=o();const c=a(s),n=Object.freeze(Object.defineProperty({__proto__:null,default:c},Symbol.toStringTag,{value:"Module"}));export{n as s};

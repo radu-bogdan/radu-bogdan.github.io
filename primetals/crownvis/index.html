@@ -4,10 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roll shift visualizer</title>
-  <!-- Styles are imported via main.ts for correct base path resolution -->
-      <!-- Local Plotly bundle (copied from node_modules) -->
-  <script src="./vendor/plotly.min.js"></script>
-    <script type="module" crossorigin src="/primetals/crownvis/assets/index-Be3Mb8C_.js"></script>
+  <!-- Plotly now loaded on-demand (scatter-only custom build) -->
+    <script type="module" crossorigin src="/primetals/crownvis/assets/index-BiWPc3-z.js"></script>
     <link rel="stylesheet" crossorigin href="/primetals/crownvis/assets/index-BZy48PEZ.css">
   </head>
   <body>
@@ -80,23 +78,6 @@
       <label class="debug-toggle"><input id="debugToggle" type="checkbox" /> Bogdan's layer</label>
     </footer>
 
-    <!-- MathJax for LaTeX rendering in help popup -->
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$','$'], ['\\(','\\)']],
-          displayMath: [['$$','$$']],
-          packages: {'[+]': ['ams','color']}, // ensure ams + color available
-          macros: {
-            red: ['{\\color{red}{#1}}', 1],
-            blue: ['{\\color{blue}{#1}}', 1],
-            green: ['{\\color{green}{#1}}', 1],
-            purple: ['{\\color{purple}{#1}}', 1]
-          }
-        },
-        svg: { fontCache: 'global' }
-      };
-    </script>
-  <script id="MathJax-script" async src="./vendor/mathjax-tex-svg-full.js"></script>
+  <!-- MathJax now lazy-loaded only when help popup opens -->
   </body>
 </html>
