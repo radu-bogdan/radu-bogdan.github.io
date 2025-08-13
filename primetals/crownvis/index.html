@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roll shift visualizer</title>
   <!-- Plotly now loaded on-demand (scatter-only custom build) -->
-    <script type="module" crossorigin src="/primetals/crownvis/assets/index-BwQHVlmX.js"></script>
-    <link rel="stylesheet" crossorigin href="/primetals/crownvis/assets/index-BZy48PEZ.css">
+    <script type="module" crossorigin src="/primetals/crownvis/assets/index-Ck4MmW96.js"></script>
+    <link rel="stylesheet" crossorigin href="/primetals/crownvis/assets/index-Bl9bReIx.css">
   </head>
   <body>
     <main class="app">
@@ -57,9 +57,15 @@
             <input id="a4" type="text" inputmode="decimal" />
           </div>
           <div class="help-btn-wrap">
-            <button id="flipPairBtn" type="button" class="help-btn" title="Flip OS-DS">Flip OS-DS</button>
+            <button id="flipPairBtn" type="button" class="help-btn" title="Flip OS-DS">Flip</button>
             <button id="resetCoeffsBtn" type="button" class="help-btn" title="Reset coefficients to session start">Reset</button>
             <button id="tokenCoeffsBtn" type="button" class="help-btn" title="Reset to hardcoded defaults">Default</button>
+          </div>
+          <div class="help-btn-wrap" style="margin-top:4px; align-items:center; display:flex; gap:8px;">
+            <label style="font-size:12px; display:flex; align-items:center; gap:6px; cursor:pointer;">
+              <input id="fixShiftChk" type="checkbox" title="Keep current shift when editing coefficients"/> Fix shift
+            </label>
+            <!-- <span style="font-size:11px; color:var(--muted);">(Keep current shift when editing coefficients)</span> -->
           </div>
           <div class="poly-plot-wrap">
             <h3 class="mini-title">Diameter Top Roll (m)</h3>
