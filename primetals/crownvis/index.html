@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Roll shift visualizer</title>
-    <!-- Plotly via CDN (rock-solid in Vite/TS) -->
-    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-    <script type="module" crossorigin src="/primetals/crownvis/assets/index-DHj6HlF-.js"></script>
-    <link rel="stylesheet" crossorigin href="/primetals/crownvis/assets/index-DTM4iesB.css">
+    <title>Roll shift visualizer</title>
+      <!-- Local Plotly bundle (copied from node_modules) -->
+    <script src="/vendor/plotly.min.js"></script>
+    <script type="module" crossorigin src="/assets/index-Be3Mb8C_.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BZy48PEZ.css">
   </head>
   <body>
     <main class="app">
@@ -57,9 +57,17 @@
             <label for="a4">a₄ (quartic)</label>
             <input id="a4" type="text" inputmode="decimal" />
           </div>
+          <div class="help-btn-wrap">
+            <button id="flipPairBtn" type="button" class="help-btn" title="Flip OS-DS">Flip OS-DS</button>
+            <button id="resetCoeffsBtn" type="button" class="help-btn" title="Reset coefficients to session start">Reset</button>
+            <button id="tokenCoeffsBtn" type="button" class="help-btn" title="Reset to hardcoded defaults">Default</button>
+          </div>
           <div class="poly-plot-wrap">
             <h3 class="mini-title">Diameter Top Roll (m)</h3>
             <div id="polyPlot"></div>
+          </div>
+          <div class="help-btn-wrap">
+            <button id="helpBtn" type="button" class="help-btn" title="Usage & formulas">Usage / Formulas</button>
           </div>
         </div>
         </div>
@@ -67,8 +75,27 @@
     </main>
 
     <footer class="app-footer">
-      <label class="debug-toggle"><input id="debugToggle" type="checkbox" /> Debug layout</label>
+      <label class="debug-toggle"><input id="darkToggle" type="checkbox" /> Dark mode</label>
+      <label class="debug-toggle"><input id="debugToggle" type="checkbox" /> Bogdan's layer</label>
     </footer>
-
+
+    <!-- MathJax for LaTeX rendering in help popup -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$']],
+          packages: {'[+]': ['ams','color']}, // ensure ams + color available
+          macros: {
+            red: ['{\\color{red}{#1}}', 1],
+            blue: ['{\\color{blue}{#1}}', 1],
+            green: ['{\\color{green}{#1}}', 1],
+            purple: ['{\\color{purple}{#1}}', 1]
+          }
+        },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+  <script id="MathJax-script" async src="/vendor/mathjax-tex-svg-full.js"></script>
   </body>
 </html>
