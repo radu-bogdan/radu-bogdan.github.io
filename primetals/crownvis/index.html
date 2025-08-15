@@ -4,11 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roll shift visualizer</title>
-  <!-- Plotly now loaded on-demand (scatter-only custom build) -->
-    <script type="module" crossorigin src="/primetals/assets/crownvis-CDk1Zyln.js"></script>
-    <link rel="modulepreload" crossorigin href="/primetals/assets/cookies-HvAS5tpZ.js">
-    <link rel="stylesheet" crossorigin href="/primetals/assets/cookies-BE50egOP.css">
-    <link rel="stylesheet" crossorigin href="/primetals/assets/crownvis-CKaTFthN.css">
+    <!-- Plotly now loaded on-demand (scatter-only custom build) -->
+    <script type="module" crossorigin src="/primetals/assets/crownvis-BErirKwD.js"></script>
+    <link rel="modulepreload" crossorigin href="/primetals/assets/initThemeDebug-DWzlb7pU.js">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/initThemeDebug-gfCsqRPK.css">
   </head>
   <body>
   <header class="topbar">
@@ -42,9 +41,9 @@
             </div>
 
             <div class="meta">
-              <span class="badge" id="crown">Shift = <strong id="crownMM" >0.00</strong> mm</span>
+              <span class="badge" id="hbadge">HShift = <strong id="hshiftMM" >0.00</strong> mm</span>
               <span class="badge" id="vbadge">VShift = <strong id="vshiftMM">0.00</strong> mm</span>
-              <span class="badge" id="crownFormula">crown = <strong id="crownVal">—</strong> µm</span>
+              <span class="badge" id="profileFormula">Induced profile = <strong id="profileVal">—</strong> µm</span>
               <span class="badge">x ∈ [−1, 1], N = <span id="npts"></span></span>
             </div>
           </div>
