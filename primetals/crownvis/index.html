@@ -4,27 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Roll shift visualizer</title>
-    <!-- Plotly now loaded on-demand (scatter-only custom build) -->
-    <script type="module" crossorigin src="/primetals/assets/crownvis-C_IPOmqq.js"></script>
-    <link rel="modulepreload" crossorigin href="/primetals/assets/initThemeDebug-DWzlb7pU.js">
-    <link rel="stylesheet" crossorigin href="/primetals/assets/initThemeDebug-gfCsqRPK.css">
+    <script type="module" crossorigin src="/primetals/assets/crownvis-BwPYMgWe.js"></script>
+    <link rel="modulepreload" crossorigin href="/primetals/assets/navigation-Cu7eAU51.js">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/navigation-Bz2C-2_u.css">
   </head>
   <body>
-  <header class="topbar">
-      <div class="topbar__inner">
-        <nav class="topbar__nav" aria-label="Main">
-          <ul class="topbar__links">
-            <li><a class="help-btn" href="./" aria-current="page">CrownVis</a></li>
-            <li><a class="btn" href="../pfclog/">pfcLog</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
     <main class="app">
-      <!-- <header>
-        <h1>Roll shift visualizer</h1>
-      </header> -->
-
       <section class="panel card panel--split">
         <div class="panel-left">
           <!-- IMPORTANT: Plotly uses a DIV, not SVG -->
@@ -50,7 +35,17 @@
         </div>
 
         <div class="coeffs card">
-          <h2 class="coeffs__title">Coefficients</h2>
+          <div class="coeffs-header">
+            <h2 class="title">Coefficients</h2>
+            <div class="dropdown">
+              <button id="coeffDropdownBtn" class="dropdown-btn">Select ▼</button>
+              <div id="coeffDropdownMenu" class="dropdown-menu">
+                <button class="dropdown-item" data-type="Polynomial">Polynomial</button>
+                <button class="dropdown-item" data-type="SmartCrown">SmartCrown</button>
+                <button class="dropdown-item" data-type="Tapered">Tapered</button>
+              </div>
+            </div>
+          </div>
           <div class="coeff">
             <label for="a1">a₁ (linear)</label>
             <input id="a1" type="text" inputmode="decimal" />
@@ -100,6 +95,5 @@
       <label class="debug-toggle"><input id="debugToggle" type="checkbox" /> Bogdan's layer</label>
     </footer>
 
-  <!-- MathJax now lazy-loaded only when help popup opens -->
   </body>
   </html>

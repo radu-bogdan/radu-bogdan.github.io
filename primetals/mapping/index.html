@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mapping</title>
+    <script type="module" crossorigin src="/primetals/assets/mapping-DvMwrek5.js"></script>
+    <link rel="modulepreload" crossorigin href="/primetals/assets/navigation-Cu7eAU51.js">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/navigation-Bz2C-2_u.css">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/mapping-DrdyKjj4.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel card panel--split">
+        <div class="panel-left">
+          <div id="triangle-plot" style="width: 100%; height: 650px;"></div>
+        </div>
+
+        <div class="control-panel card">
+          
+          <div class="info-section">
+            <h2 class="title">Triangle Info</h2>
+            <div id="vertex-info"></div>
+          </div>
+          
+          <h2 class="title">Function</h2>
+          <div class="coeff">
+            <input id="function-expr" type="text" placeholder="f(x, y) = " />
+          </div>
+          <div class="help-btn-wrap">
+            <button id="plot-p1-btn" type="button" class="help-btn">Plot</button>
+            <button id="clear-p1-btn" type="button" class="help-btn">Clear</button>
+            <button id="reset-triangle-btn" type="button" class="help-btn">Reset</button>
+          </div>
+
+          <div class="toggles-row">
+            <label class="toggle-label">
+              <input id="show-mesh-checkbox" type="checkbox"/>Show Mesh
+            </label>
+            <label class="toggle-label">
+              <input id="mapping-off-checkbox" type="checkbox" checked/>Mapping off
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="app-footer">
+      <label class="debug-toggle"><input id="darkToggle" type="checkbox" /> Dark mode</label>
+      <label class="debug-toggle"><input id="debugToggle" type="checkbox" /> Bogdan's layer</label>
+    </footer>
+  </body>
+</html>
