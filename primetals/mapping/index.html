@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mapping</title>
-    <script type="module" crossorigin src="/primetals/assets/mapping-DvMwrek5.js"></script>
-    <link rel="modulepreload" crossorigin href="/primetals/assets/navigation-Cu7eAU51.js">
-    <link rel="stylesheet" crossorigin href="/primetals/assets/navigation-Bz2C-2_u.css">
-    <link rel="stylesheet" crossorigin href="/primetals/assets/mapping-DrdyKjj4.css">
+    <script type="module" crossorigin src="/primetals/assets/mapping-CQrpqQld.js"></script>
+    <link rel="modulepreload" crossorigin href="/primetals/assets/navigation-Cdl6zb_0.js">
+    <link rel="modulepreload" crossorigin href="/primetals/assets/help-Cr0pcDYX.js">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/navigation-DcaSspip.css">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/mapping-BUEcpgbM.css">
   </head>
   <body>
     <main class="app">
@@ -27,6 +28,7 @@
           <div class="coeff">
             <input id="function-expr" type="text" placeholder="f(x, y) = " />
           </div>
+          
           <div class="help-btn-wrap">
             <button id="plot-p1-btn" type="button" class="help-btn">Plot</button>
             <button id="clear-p1-btn" type="button" class="help-btn">Clear</button>
@@ -38,9 +40,29 @@
               <input id="show-mesh-checkbox" type="checkbox"/>Show Mesh
             </label>
             <label class="toggle-label">
-              <input id="mapping-off-checkbox" type="checkbox" checked/>Mapping off
+              <input id="mapping-off-checkbox" type="checkbox"/>Mapping off
             </label>
           </div>
+
+          <h2 class="title">Vector Transformation</h2>
+          <div class="transformation-options">
+            <label class="toggle-label">
+              <input id="transformation-linear" type="radio" name="transformation-type" value="linear" checked/>Linear
+            </label>
+            <label class="toggle-label">
+              <input id="transformation-covariant" type="radio" name="transformation-type" value="covariant"/>Covariant
+            </label>
+            <label class="toggle-label">
+              <input id="transformation-contravariant" type="radio" name="transformation-type" value="contravariant"/>Contravariant
+            </label>
+          </div>
+
+          <div class="help-btn-wrap">
+            <button id="helpBtn" type="button" class="help-btn" title="Usage & formulas">Usage / Formulas</button>
+          </div>
+
+          <h2 class="title">Active Functions</h2>
+          <div id="active-functions-display" class="active-functions-display"></div>
         </div>
       </section>
     </main>
