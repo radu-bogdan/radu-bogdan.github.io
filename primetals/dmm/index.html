@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
+    <title>DMM Data Viewer</title>
+    <meta name="theme-color" content="#ffffff" />
+    <script type="module" crossorigin src="/assets/index-DxjY75Dv.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CjxqziXZ.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel card">
+        <div class="panel">
+          <input id="fileInput" type="file" style="display:none" />
+          
+          <!-- New unified menu bar -->
+          <div class="menu-bar" id="menuBar" style="display:none;">
+            <!-- Left: Plate chooser -->
+            <div class="menu-section menu-left">
+              <span class="menu-label">PLATE</span>
+              <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
+                <select id="plateDropdown" class="menu-dropdown" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;">
+                </select>
+                <button id="plateNext" type="button" class="control-btn" title="Next plate">›</button>
+              </div>
+            </div>
+            
+            <!-- Center: View toggles -->
+            <div class="menu-section menu-center">
+              <!-- <span class="menu-label">VIEW</span> -->
+              <div class="menu-toggles">
+                <button id="toggleCurrent" class="menu-toggle-btn active" data-target="currentCard">
+                  <span>Current</span>
+                </button>
+                <button id="toggleMeasurements" class="menu-toggle-btn" data-target="flatnessCard">
+                  <span>Flatness</span>
+                </button>
+                <button id="toggleProfile" class="menu-toggle-btn" data-target="profileCard">
+                  <span>Profile</span>
+                </button>
+                <button id="toggleRoll" class="menu-toggle-btn" data-target="rollCard">
+                  <span>Roll</span>
+                </button>
+                <button id="toggleSegments" class="menu-toggle-btn" data-target="segmentsCard">
+                  <span>Segments</span>
+                </button>
+                <button id="toggleTwm" class="menu-toggle-btn" data-target="twmCard">
+                  <span>Twm</span>
+                </button>
+                <button id="toggleBmRes" class="menu-toggle-btn" data-target="bmResCard">
+                  <span>BmRes</span>
+                </button>
+                <button id="toggleSetpoints" class="menu-toggle-btn" data-target="setpointsCard">
+                  <span>Setpoints</span>
+                </button>
+                <button id="toggleAll" class="menu-toggle-btn" data-target="parsedCard">
+                  <span>All</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Right: Status -->
+            <div class="menu-section menu-right">
+              <span class="badge" id="status">Ready</span>
+            </div>
+          </div>
+          
+          <!-- Initial status when no file loaded -->
+          <div class="controls-panel" id="initialStatus" style="margin-bottom:12px;">
+            <div class="status-group">
+              <span class="badge" id="statusInitial">Drop DMM file anywhere or Ctrl+O</span>
+            </div>
+          </div>
+          
+          <div id="meta" class="meta" style="display:none;"></div>
+          
+          <div class="plot-card" style="display:none;" id="currentCard">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <h3 class="plot-title">CURRENT PLATE</h3>
+              <div style="display:flex; gap:6px;">
+                <button id="expandCurrentBtn" type="button" class="help-btn">Expand All</button>
+                <button id="collapseCurrentBtn" type="button" class="help-btn">Collapse All</button>
+              </div>
+            </div>
+            <div id="current" class="json-tree"></div>
+          </div>
+          
+          <div class="plot-card" style="display:none;" id="flatnessCard">
+            <div class="flatness-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; gap:12px;">
+              <div style="display:flex; align-items:center; gap:8px; flex:0 0 auto;">
+                <h3 class="plot-title" style="margin:0;">FLATNESS MEASUREMENTS</h3>
+                <select id="flatnessMarkerMode" style="font-size:11px; padding:2px 2px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;">
+                  <option value="amplitude">Amplitude</option>
+                  <option value="elongation">Elongation</option>
+                </select>
+              </div>
+              <div class="flatness-compact-toolbar" style="flex:1; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+                <button id="flatnessShowGrid" type="button" class="help-btn" data-compact-toggle title="Toggle measurement grid visibility">G</button>
+                <button id="flatnessDivergingColor" type="button" class="help-btn active" data-compact-toggle title="Toggle diverging colorscale">DC</button>
+                <button id="flatnessFixedScale" type="button" class="help-btn" data-compact-toggle title="Force all scans to use a 0-100 colorscale">0-100</button>
+                <button id="flatnessSyncScale" type="button" class="help-btn" data-compact-toggle title="Sync the colorscale to the selected gauge across all scans">S</button>
+              </div>
+              <div style="flex:0 0 40px;" aria-hidden="true"></div>
+            </div>
+            <div id="flatnessPlotContainer" style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;"></div>
+          </div>
+          
+          <div class="plot-card" style="display:none;" id="profileCard">
+            <div class="profile-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; gap:12px;">
+              <h3 class="plot-title" style="margin:0; flex:0 0 auto;">PROFILE MEASUREMENTS</h3>
+              <div class="profile-compact-toolbar" style="flex:1; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+                <button id="profileCenterlineMode" type="button" class="help-btn" data-compact-toggle title="Toggle centerline / heatmap">H</button>
+                <button id="profileP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle P0 / P1">P1</button>
+                <button id="profileShowGrid" type="button" class="help-btn" data-compact-toggle title="Toggle grid">G</button>
+                <button id="profileDivergingColor" type="button" class="help-btn" data-compact-toggle title="Toggle diverging colorscale">DC</button>
+                <button id="profileCompositeMode" type="button" class="help-btn" data-compact-toggle title="Toggle composite/separate cross-sections">S</button>
+                <button id="profileHoverMode" type="button" class="help-btn" data-compact-toggle title="Toggle hover live update">H</button>
+                <button id="profileStatsMode" type="button" class="help-btn" data-compact-toggle title="Toggle stats visibility">S</button>
+                <button id="profileCrossSectionLine" type="button" class="help-btn" data-compact-toggle title="Toggle cross-section marker line">BL</button>
+              </div>
+              <div style="flex:0 0 40px;" aria-hidden="true"></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;">
+              <div id="profilePlotContainer" style="display:flex; flex-direction:column; gap:12px;"></div>
+            </div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="rollCard">
+            <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:8px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                <h3 class="plot-title" style="margin:0;">ROLL DATA</h3>
+                <div style="flex:1; display:flex; align-items:center; gap:12px;">
+                  <div style="flex:1;"></div>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <button id="rollPlotModeToggle" type="button" class="help-btn" data-compact-toggle title="Toggle plot mode">P</button>
+                    <button id="rollSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
+                  </div>
+                  <div style="flex:1;"></div>
+                  <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                    <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                      <span>Stand</span>
+                      <button id="rollStandPrev" type="button" class="control-btn" title="Previous stand">‹</button>
+                      <select id="rollStandSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                      <button id="rollStandNext" type="button" class="control-btn" title="Next stand">›</button>
+                    </div>
+                    <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                      <span>Pass</span>
+                      <button id="rollPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                      <select id="rollPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                      <button id="rollPassNext" type="button" class="control-btn" title="Next pass">›</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="rollDataOutput" style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-family:var(--font-family-sans);"></div>
+            <div id="roll2dContainer"></div>
+            <div id="roll3dContainer"></div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="segmentsCard">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:8px;">
+              <h3 class="plot-title" style="margin:0;">SEGMENT DATA</h3>
+              <div style="flex:1; display:flex; align-items:center; gap:12px;">
+                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                  <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                    <span>Stand</span>
+                    <button id="standPrev" type="button" class="control-btn" title="Previous stand">‹</button>
+                    <select id="standSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                    <button id="standNext" type="button" class="control-btn" title="Next stand">›</button>
+                  </div>
+                  <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                    <span>Pass</span>
+                    <button id="segmentsPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                    <select id="segmentsPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                    <button id="segmentsPassNext" type="button" class="control-btn" title="Next pass">›</button>
+                  </div>
+                </div>
+                <div style="flex:1;"></div>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <button id="segmentsSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
+                  <button id="segmentsInheritanceBtn" type="button" class="help-btn" data-compact-toggle title="Toggle inheritance segment line visibility">A</button>
+                  <button id="segmentsCopyBtn" type="button" class="help-btn" data-compact-toggle title="Copy signals to clipboard">C</button>
+                </div>
+                <div style="flex:1;"></div>
+              </div>
+            </div>
+            <div id="segmentsContainer" style="display:flex; gap:12px; margin-top:12px; align-items:stretch;">
+              <!-- Left side: Signal selection panel -->
+              <div id="segmentsSignalPanel" class="signal-panel" style="width: 300px; padding-right: 12px; display: flex; flex-direction: column; gap: 8px; height: 100%; overflow: hidden;">
+                <!-- Signal search -->
+                <div class="signal-search-group">
+                  <input type="text" id="segmentsSignalSearch" placeholder="Search signals..." style="width: 100%; padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 12px;">
+                </div>
+                
+                <!-- Active signals -->
+                <div class="signal-section">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary);">ACTIVE SIGNALS</span>
+                    <button id="segmentsClearAllSignals" type="button" class="help-btn" style="font-size: 10px; padding: 2px 6px;" title="Clear all signals">Clear</button>
+                  </div>
+                  <div id="segmentsSelectedSignals" class="selected-signals" style="display: flex; flex-wrap: wrap; gap: 4px; min-height: 32px; overflow-y: auto; padding: 4px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--surface);">
+                    <span id="segmentsNoSignals" style="font-size: 11px; color: var(--color-text-secondary); align-self: center;">No signals selected</span>
+                  </div>
+                </div>
+                
+                <!-- Available signals -->
+                <div class="signal-section" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; gap: 6px;">
+                    <span style="font-size: 11px; font-weight: 600; color: var(--color-text-secondary);">AVAILABLE SIGNALS</span>
+                    <div style="display: flex; gap: 4px; align-items: center;">
+                      <select id="segmentsPresetSelect" style="font-size: 10px; padding: 2px 4px; border: 1px solid var(--color-border); border-radius: 4px; background: white; cursor: pointer;">
+                        <option value="">Presets</option>
+                      </select>
+                      <button id="segmentsSelectAllSignals" type="button" class="help-btn" style="font-size: 10px; padding: 2px 4px;" title="Select all">All</button>
+                      <button id="segmentsDeselectAllSignals" type="button" class="help-btn" style="font-size: 10px; padding: 2px 4px;" title="Deselect all">None</button>
+                    </div>
+                  </div>
+                  <div id="segmentsSignalList" class="signal-list" style="flex: 1; overflow-y: auto; border: 1px solid var(--color-border); border-radius: 4px; background: var(--surface); min-height: 0; padding: 4px;">
+                    <!-- Signals will be populated here -->
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Right side: Plot area -->
+              <div id="segmentsPlotColumn" style="flex: 1; display:flex; flex-direction:column; gap:12px; min-width:0; align-self:stretch;">
+                <div id="segmentsPlotContainer" style="flex: 0 0 auto; display:flex; flex-direction:column;"></div>
+                <div id="segmentsConsolePanel" style="flex: 0 0 400px; height:400px; display:flex; flex-direction:column; gap:6px; border:1px solid var(--color-border); border-radius:6px; padding:8px; background:var(--surface);">
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <span style="font-size:11px; font-weight:600; color:var(--color-text-secondary); letter-spacing:0.5px;">SIGNAL CONSOLE</span>
+                    <button id="segmentsConsoleHelp" type="button" class="help-btn" style="font-size:10px; padding:2px 6px;">Help</button>
+                  </div>
+                  <div id="segmentsConsoleOutput" style="flex:1 1 auto; overflow-y:auto; border:1px solid var(--color-border); border-radius:4px; background:var(--surface-muted, #f9f9fb); padding:6px; font-family:var(--font-family-mono, monospace); font-size:11px; white-space:pre-wrap; line-height:1.35;"></div>
+                  <form id="segmentsConsoleForm" style="display:flex; gap:4px; margin-top:6px;">
+                    <input id="segmentsConsoleInput" type="text" style="flex:1; padding:4px 6px; border:1px solid var(--color-border); border-radius:4px; font-size:12px; font-family:var(--font-family-mono, monospace);" autocomplete="off" />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="twmCard">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+              <h3 class="plot-title">THICKNESS MEASUREMENTS</h3>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Stand</span>
+                  <button id="twmStandPrev" type="button" class="control-btn" title="Previous stand">‹</button>
+                  <select id="twmStandSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="twmStandNext" type="button" class="control-btn" title="Next stand">›</button>
+                </div>
+                <button id="twmDifferentialMode" type="button" class="help-btn" data-compact-toggle title="Toggle differential mode (subtract first column)">D</button>
+              </div>
+            </div>
+            <div id="twmPlotContainer" style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;"></div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="bmResCard">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+              <h3 class="plot-title">BM RESULTS</h3>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Pass</span>
+                  <button id="bmResPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                  <select id="bmResPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="bmResPassNext" type="button" class="control-btn" title="Next pass">›</button>
+                </div>
+              </div>
+            </div>
+            <div id="bmResPlotContainer" style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;"></div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="setpointsCard">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <h3 class="plot-title">SETPOINT SUMMARY</h3>
+              <span class="help-btn" aria-hidden="true" style="visibility:hidden;">&nbsp;</span>
+            </div>
+            <div id="setpointsOutput" class="setpoints-output"></div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="parsedCard">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <h3 class="plot-title">ALL PLATES</h3>
+              <div style="display:flex; gap:6px;">
+                <button id="expandAllBtn" type="button" class="help-btn">Expand All</button>
+                <button id="collapseAllBtn" type="button" class="help-btn">Collapse All</button>
+              </div>
+            </div>
+            <div id="parsed" class="json-tree"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="app-footer">
+      <small>DMM Data Viewer • Bogdan Radu 2025</small>
+    </footer>
+    <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file to load</div>
+  </body>
+</html>
