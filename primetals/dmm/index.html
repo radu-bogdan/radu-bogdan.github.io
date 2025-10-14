@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
-    <title>DMM Data Viewer</title>
+    <title>DMM Data Viewer</title>
     <meta name="theme-color" content="#ffffff" />
-    <script type="module" crossorigin src="./assets/index-99hpncnB.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CjxqziXZ.css">
+    <script type="module" crossorigin src="./assets/index-DRK06vCj.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/plotly-DWhyBWoV.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-DvNwCq1p.css">
   </head>
   <body>
     <main class="app">
@@ -17,7 +18,8 @@
           <!-- New unified menu bar -->
           <div class="menu-bar" id="menuBar" style="display:none;">
             <!-- Left: Plate chooser -->
-            <div class="menu-section menu-left">
+            <div class="menu-section menu-left" style="display:flex; align-items:center; gap:6px;">
+              <img src="./assets/logo_circle-1xSRGLIZ.svg" alt="Logo" style="height:30px; width:auto; display:block; flex:0 0 auto;" />
               <span class="menu-label">PLATE</span>
               <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
                 <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
@@ -63,7 +65,6 @@
             
             <!-- Right: Status -->
             <div class="menu-section menu-right">
-              <span class="badge" id="status">Ready</span>
             </div>
           </div>
           
@@ -161,31 +162,30 @@
           </div>
 
           <div class="plot-card" style="display:none;" id="segmentsCard">
-            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:8px;">
-              <h3 class="plot-title" style="margin:0;">SEGMENT DATA</h3>
-              <div style="flex:1; display:flex; align-items:center; gap:12px;">
-                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                  <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
-                    <span>Stand</span>
-                    <button id="standPrev" type="button" class="control-btn" title="Previous stand">‹</button>
-                    <select id="standSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
-                    <button id="standNext" type="button" class="control-btn" title="Next stand">›</button>
-                  </div>
-                  <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
-                    <span>Pass</span>
-                    <button id="segmentsPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
-                    <select id="segmentsPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
-                    <button id="segmentsPassNext" type="button" class="control-btn" title="Next pass">›</button>
-                  </div>
+            <!-- Simplified single-row header for consistent alignment -->
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px; width:100%;">
+              <h3 class="plot-title" style="margin:0; flex:0 0 auto;">SEGMENT DATA</h3>
+              <div id="segmentsHeaderPickers" style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Stand</span>
+                  <button id="standPrev" type="button" class="control-btn" title="Previous stand">‹</button>
+                  <select id="standSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="standNext" type="button" class="control-btn" title="Next stand">›</button>
                 </div>
-                <div style="flex:1;"></div>
-                <div style="display:flex; align-items:center; gap:6px;">
-                  <button id="segmentsSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
-                  <button id="segmentsInheritanceBtn" type="button" class="help-btn" data-compact-toggle title="Toggle inheritance segment line visibility">A</button>
-                  <button id="segmentsCopyBtn" type="button" class="help-btn" data-compact-toggle title="Copy signals to clipboard">C</button>
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Pass</span>
+                  <button id="segmentsPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                  <select id="segmentsPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="segmentsPassNext" type="button" class="control-btn" title="Next pass">›</button>
                 </div>
-                <div style="flex:1;"></div>
               </div>
+              <div id="segmentsHeaderControls" style="display:flex; align-items:center; gap:6px; flex:1 1 auto; justify-content:center;">
+                <button id="segmentsSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
+                <button id="segmentsInheritanceBtn" type="button" class="help-btn" data-compact-toggle title="Toggle inheritance segment line visibility">A</button>
+                <button id="segmentsXAxisBtn" type="button" class="help-btn" data-compact-toggle title="Toggle X-axis between segment index and position">X</button>
+                <button id="segmentsCopyBtn" type="button" class="help-btn" data-compact-toggle title="Copy signals to clipboard">C</button>
+              </div>
+              <button id="segmentsSpecialBtn" type="button" class="help-btn" data-compact-toggle title="Toggle multi-pass special layer" style="margin-left:auto;">SP</button>
             </div>
             <div id="segmentsContainer" style="display:flex; gap:12px; margin-top:12px; align-items:stretch;">
               <!-- Left side: Signal selection panel -->
@@ -296,6 +296,6 @@
     <footer class="app-footer">
       <small>DMM Data Viewer • Bogdan Radu 2025</small>
     </footer>
-    <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file to load</div>
+    <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file to load</div>
   </body>
 </html>
