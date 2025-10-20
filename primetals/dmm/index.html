@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
-    <title>DMM Data Viewer</title>
+    <title>DMM Data Viewer</title>
     <meta name="theme-color" content="#ffffff" />
-    <script type="module" crossorigin src="./assets/index-DRK06vCj.js"></script>
+    <script type="module" crossorigin src="./assets/index-CPozB6cB.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/plotly-DWhyBWoV.js">
     <link rel="stylesheet" crossorigin href="./assets/index-DvNwCq1p.css">
   </head>
@@ -19,7 +19,7 @@
           <div class="menu-bar" id="menuBar" style="display:none;">
             <!-- Left: Plate chooser -->
             <div class="menu-section menu-left" style="display:flex; align-items:center; gap:6px;">
-              <img src="./assets/logo_circle-1xSRGLIZ.svg" alt="Logo" style="height:30px; width:auto; display:block; flex:0 0 auto;" />
+              <img src="./assets/logo_circle-Do1AEmZq.svg" alt="Logo" style="height:30px; width:auto; display:block; flex:0 0 auto;" />
               <span class="menu-label">PLATE</span>
               <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
                 <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
@@ -99,9 +99,12 @@
               </div>
               <div class="flatness-compact-toolbar" style="flex:1; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
                 <button id="flatnessShowGrid" type="button" class="help-btn" data-compact-toggle title="Toggle measurement grid visibility">G</button>
+                <button id="flatnessP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle P0 / P1">P1</button>
                 <button id="flatnessDivergingColor" type="button" class="help-btn active" data-compact-toggle title="Toggle diverging colorscale">DC</button>
                 <button id="flatnessFixedScale" type="button" class="help-btn" data-compact-toggle title="Force all scans to use a 0-100 colorscale">0-100</button>
                 <button id="flatnessSyncScale" type="button" class="help-btn" data-compact-toggle title="Sync the colorscale to the selected gauge across all scans">S</button>
+                <button id="flatnessHoverMode" type="button" class="help-btn" data-compact-toggle title="Toggle hover live update">H</button>
+                <button id="flatnessCrossSectionLine" type="button" class="help-btn" data-compact-toggle title="Toggle cross-section marker line">BL</button>
               </div>
               <div style="flex:0 0 40px;" aria-hidden="true"></div>
             </div>
@@ -116,6 +119,7 @@
                 <button id="profileP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle P0 / P1">P1</button>
                 <button id="profileShowGrid" type="button" class="help-btn" data-compact-toggle title="Toggle grid">G</button>
                 <button id="profileDivergingColor" type="button" class="help-btn" data-compact-toggle title="Toggle diverging colorscale">DC</button>
+                <button id="profileSyncScale" type="button" class="help-btn" data-compact-toggle title="Sync the colorscale to the hovered gauge across all scans">CS</button>
                 <button id="profileCompositeMode" type="button" class="help-btn" data-compact-toggle title="Toggle composite/separate cross-sections">S</button>
                 <button id="profileHoverMode" type="button" class="help-btn" data-compact-toggle title="Toggle hover live update">H</button>
                 <button id="profileStatsMode" type="button" class="help-btn" data-compact-toggle title="Toggle stats visibility">S</button>
@@ -129,32 +133,27 @@
           </div>
 
           <div class="plot-card" style="display:none;" id="rollCard">
-            <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:8px;">
-              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
-                <h3 class="plot-title" style="margin:0;">ROLL DATA</h3>
-                <div style="flex:1; display:flex; align-items:center; gap:12px;">
-                  <div style="flex:1;"></div>
-                  <div style="display:flex; align-items:center; gap:6px;">
-                    <button id="rollPlotModeToggle" type="button" class="help-btn" data-compact-toggle title="Toggle plot mode">P</button>
-                    <button id="rollSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
-                  </div>
-                  <div style="flex:1;"></div>
-                  <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                    <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
-                      <span>Stand</span>
-                      <button id="rollStandPrev" type="button" class="control-btn" title="Previous stand">‹</button>
-                      <select id="rollStandSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
-                      <button id="rollStandNext" type="button" class="control-btn" title="Next stand">›</button>
-                    </div>
-                    <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
-                      <span>Pass</span>
-                      <button id="rollPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
-                      <select id="rollPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
-                      <button id="rollPassNext" type="button" class="control-btn" title="Next pass">›</button>
-                    </div>
-                  </div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px; width:100%; flex-wrap:wrap;">
+              <h3 class="plot-title" style="margin:0; flex:0 0 auto;">ROLL DATA</h3>
+              <div id="rollPickersRow" style="display:flex; align-items:center; gap:12px; flex:0 0 auto; flex-wrap:wrap;">
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Stand</span>
+                  <button id="rollStandPrev" type="button" class="control-btn" title="Previous stand">‹</button>
+                  <select id="rollStandSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="rollStandNext" type="button" class="control-btn" title="Next stand">›</button>
+                </div>
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Pass</span>
+                  <button id="rollPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                  <select id="rollPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="rollPassNext" type="button" class="control-btn" title="Next pass">›</button>
                 </div>
               </div>
+              <div id="rollHeaderControls" style="display:flex; align-items:center; gap:6px; flex:1 1 auto; justify-content:center;">
+                <button id="rollPlotModeToggle" type="button" class="help-btn" data-compact-toggle title="Toggle plot mode">P</button>
+                <button id="rollSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
+              </div>
+              <button id="rollSpecialBtn" type="button" class="help-btn" data-compact-toggle title="Toggle multi-pass roll layer" style="font-size:10px; margin-left:auto;">SP</button>
             </div>
             <div id="rollDataOutput" style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-family:var(--font-family-sans);"></div>
             <div id="roll2dContainer"></div>
@@ -242,17 +241,24 @@
           </div>
 
           <div class="plot-card" style="display:none;" id="twmCard">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
-              <h3 class="plot-title">THICKNESS MEASUREMENTS</h3>
-              <div style="display:flex; align-items:center; gap:12px;">
+            <div class="twm-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; gap:12px;">
+              <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
+                <h3 class="plot-title" style="margin:0;">THICKNESS MEASUREMENTS</h3>
                 <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
                   <span>Stand</span>
                   <button id="twmStandPrev" type="button" class="control-btn" title="Previous stand">‹</button>
                   <select id="twmStandSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
                   <button id="twmStandNext" type="button" class="control-btn" title="Next stand">›</button>
                 </div>
-                <button id="twmDifferentialMode" type="button" class="help-btn" data-compact-toggle title="Toggle differential mode (subtract first column)">D</button>
               </div>
+              <div class="twm-compact-toolbar" style="flex:1; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
+                <button id="twmDifferentialMode" type="button" class="help-btn" data-compact-toggle title="Toggle differential mode (subtract first column)">D</button>
+                <button id="twmP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle heatmap smoothing">P1</button>
+                <button id="twmHoverMode" type="button" class="help-btn" data-compact-toggle title="Toggle hover live update">H</button>
+                <button id="twmXAxisMode" type="button" class="help-btn" data-compact-toggle title="Toggle X-axis between segment index and position">X</button>
+                <button id="twmCrossSectionLine" type="button" class="help-btn" data-compact-toggle title="Toggle cross-section marker line">BL</button>
+              </div>
+              <div style="flex:0 0 40px;" aria-hidden="true"></div>
             </div>
             <div id="twmPlotContainer" style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;"></div>
           </div>
@@ -296,6 +302,6 @@
     <footer class="app-footer">
       <small>DMM Data Viewer • Bogdan Radu 2025</small>
     </footer>
-    <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file to load</div>
+    <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file to load</div>
   </body>
 </html>
