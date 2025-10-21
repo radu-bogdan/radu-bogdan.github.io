@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
     <title>DMM Data Viewer</title>
     <meta name="theme-color" content="#ffffff" />
-    <script type="module" crossorigin src="./assets/index-CPozB6cB.js"></script>
+    <script type="module" crossorigin src="./assets/index-CSuenlfx.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/plotly-DWhyBWoV.js">
     <link rel="stylesheet" crossorigin href="./assets/index-DvNwCq1p.css">
   </head>
@@ -106,7 +106,15 @@
                 <button id="flatnessHoverMode" type="button" class="help-btn" data-compact-toggle title="Toggle hover live update">H</button>
                 <button id="flatnessCrossSectionLine" type="button" class="help-btn" data-compact-toggle title="Toggle cross-section marker line">BL</button>
               </div>
-              <div style="flex:0 0 40px;" aria-hidden="true"></div>
+              <div style="flex:0 0 auto; display:flex; align-items:center; gap:6px;">
+                <span style="font-size:10px; color:var(--color-text-secondary); letter-spacing:0.4px;">Poly</span>
+                <select id="flatnessPolynomialSource" style="font-size:11px; padding:2px 4px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;">
+                  <option value="flatnessDeg2">Deg 2</option>
+                  <option value="flatnessDeg4">Deg 4</option>
+                  <option value="flatnessDeg6">Deg 6</option>
+                  <option value="measuredPoly">Measured</option>
+                </select>
+              </div>
             </div>
             <div id="flatnessPlotContainer" style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;"></div>
           </div>
