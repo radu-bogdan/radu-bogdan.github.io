@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
-    <title>DMM Data Viewer</title>
+    <title>DMM Data Viewer</title>
     <meta name="theme-color" content="#ffffff" />
-    <script type="module" crossorigin src="./assets/index-DAsljZJ8.js"></script>
+    <script type="module" crossorigin src="./assets/index-yS1ZC7wK.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/plotly-DWhyBWoV.js">
     <link rel="stylesheet" crossorigin href="./assets/index-DvNwCq1p.css">
   </head>
@@ -13,13 +13,13 @@
     <main class="app">
       <section class="panel card">
         <div class="panel">
-          <input id="fileInput" type="file" style="display:none" />
+          <input id="fileInput" type="file" style="display:none" multiple />
           
           <!-- New unified menu bar -->
           <div class="menu-bar" id="menuBar" style="display:none;">
             <!-- Left: Plate chooser -->
             <div class="menu-section menu-left" style="display:flex; align-items:center; gap:6px;">
-              <img src="./assets/logo_circle-1xSRGLIZ.svg" alt="Logo" style="height:30px; width:auto; display:block; flex:0 0 auto;" />
+              <img src="./assets/logo_circle-Do1AEmZq.svg" alt="Logo" style="height:30px; width:auto; display:block; flex:0 0 auto;" />
               <span class="menu-label">PLATE</span>
               <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
                 <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
@@ -54,6 +54,9 @@
                 <button id="toggleBmRes" class="menu-toggle-btn" data-target="bmResCard">
                   <span>BmRes</span>
                 </button>
+                <button id="toggleChemestry" class="menu-toggle-btn" data-target="chemestryCard">
+                  <span>Chemistry</span>
+                </button>
                 <button id="toggleSetpoints" class="menu-toggle-btn" data-target="setpointsCard">
                   <span>Setpoints</span>
                 </button>
@@ -71,7 +74,7 @@
           <!-- Initial status when no file loaded -->
           <div class="controls-panel" id="initialStatus" style="margin-bottom:12px;">
             <div class="status-group">
-              <span class="badge" id="statusInitial">Drop DMM file anywhere or Ctrl+O</span>
+              <span class="badge" id="statusInitial">Drop DMM file(s) anywhere or Ctrl+O</span>
             </div>
           </div>
           
@@ -140,6 +143,15 @@
             <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px;">
               <div id="profilePlotContainer" style="display:flex; flex-direction:column; gap:12px;"></div>
             </div>
+          </div>
+
+          <div class="plot-card" style="display:none;" id="chemestryCard">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; gap:12px;">
+              <h3 class="plot-title" style="margin:0;">CHEMISTRY COMPOSITION</h3>
+              <span id="chemestryTotal" style="font-size:12px; color:var(--color-text-subtle); visibility:hidden;"></span>
+            </div>
+            <div id="chemestryMessage" class="chemestry__message" style="display:none; font-size:12px; color:var(--color-text-subtle); margin-bottom:8px;"></div>
+            <div id="chemestryPlot" style="width:100%; min-height:360px;"></div>
           </div>
 
           <div class="plot-card" style="display:none;" id="rollCard">
@@ -312,6 +324,6 @@
     <footer class="app-footer">
       <small>DMM Data Viewer • Bogdan Radu 2025</small>
     </footer>
-    <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file to load</div>
+  <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop DMM file(s) to load</div>
   </body>
 </html>
