@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Roll Contour Analysis</title>
+  <meta name="theme-color" content="#0d1117" />
+  <script type="module" crossorigin src="/assets/index-Bg5DbiIA.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor-D2eyJzy6.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-BQZQN1jO.css">
+</head>
+<body>
+  <main class="app minimal">
+    <div class="toolbar">
+      <button id="clearBtn" type="button" class="help-btn" title="Clear all signals">Clear</button>
+      <button id="copyBtn" type="button" class="help-btn" title="Save signals to file">Save</button>
+      <button id="resetLoadedBtn" type="button" class="help-btn" title="Reset signals to last loaded JSON state (shifts, scales, flips)">Reset</button>
+      <button id="adjustBtn" type="button" class="help-btn" title="Toggle adjust mode (A): drag base signals (left plot) to reposition them. Derived signals are calculated from formulas." aria-pressed="false" role="button">Adjust</button>
+      <div class="filename-section">
+        <span class="filename-label">Filename:</span>
+        <input id="filenameInput" type="text" class="filename-input" placeholder="Enter filename" title="Filename for saving signals">
+      </div>
+      <span class="badge" id="status">Paste lines of signals or drop a file</span>
+    </div>
+    <div id="orientBar" class="orient-bar hidden" aria-label="Choose table orientation">
+      <span class="orient-label">Interpret table as:</span>
+      <button type="button" id="orientRowsBtn" class="help-btn">Rows</button>
+      <button type="button" id="orientColsBtn" class="help-btn">Columns</button>
+      <button type="button" id="orientCancelBtn" class="help-btn" style="--_btn-color:var(--color-muted); --_btn-border:var(--color-border);">Cancel</button>
+    </div>
+    <!-- Two plots side by side -->
+    <div class="plots-container">
+      <div class="plot-card">
+        <h3 class="plot-title">Base Signals</h3>
+        <div class="plot-content">
+          <div id="plot" class="plot-wrapper" tabindex="0" aria-label="Base signals plot area (Plotly)"></div>
+        </div>
+      </div>
+      <div class="plot-card">
+        <h3 class="plot-title">Derived Signals</h3>
+        <div class="plot-content">
+          <div id="plot2" class="plot-wrapper" tabindex="0" aria-label="Derived signals plot area (Plotly)"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom panel with signals and formulas in columns -->
+    <div class="bottom-panel">
+      <div class="bottom-columns">
+        <aside class="signals-column" aria-label="Signals list">
+          <div class="column-header">
+            <span class="column-title">Signals</span>
+            <div class="column-actions">
+              <button id="alignSignalsOSBtn" type="button" class="help-btn" title="Align all signals at end position (OS, x=1)">OS</button>
+              <button id="alignSignalsDSBtn" type="button" class="help-btn" title="Align all signals at start position (DS, x=-1)">DS</button>
+              <button id="resetColorsBtn" type="button" class="help-btn color-swatch-btn" title="Reset all signal colors to palette order">
+                <span class="color-swatch-icon"></span>
+              </button>
+            </div>
+          </div>
+          <div id="signalsList" class="signals-list"></div>
+        </aside>
+        
+        <section class="formulas-column" aria-label="Formulas">
+          <div class="column-header">
+            <span class="column-title">Formulas</span>
+            <div class="column-actions">
+              <button id="addFormulaBtn" type="button" class="help-btn" title="Add new formula">New</button>
+            </div>
+          </div>
+          <div id="derivedList" class="formulas-list" aria-live="polite"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <!-- Hidden textarea used as a fallback when programmatic clipboard API is unavailable -->
+  <textarea id="pasteFallback" class="visually-hidden" aria-hidden="true" tabindex="-1"></textarea>
+  <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">Drop file with numbers</div>
+</body>
+</html>
