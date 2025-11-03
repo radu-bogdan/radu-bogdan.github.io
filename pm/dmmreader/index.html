@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
     <title>DMM Data Viewer</title>
     <meta name="theme-color" content="#ffffff" />
-    <script type="module" crossorigin src="./assets/index-DO6lCmhz.js"></script>
+    <script type="module" crossorigin src="./assets/index-DgokkKzJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/plotly-DWhyBWoV.js">
     <link rel="stylesheet" crossorigin href="./assets/index-DvNwCq1p.css">
   </head>
@@ -265,12 +265,18 @@
           <div class="plot-card" style="display:none;" id="twmCard">
             <div class="twm-header-row" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; gap:12px;">
               <div style="display:flex; align-items:center; gap:12px; flex:0 0 auto;">
-                <h3 class="plot-title" style="margin:0;">THICKNESS MEASUREMENTS</h3>
+                <h3 class="plot-title" style="margin:0;">TWM</h3>
                 <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
                   <span>Stand</span>
                   <button id="twmStandPrev" type="button" class="control-btn" title="Previous stand">‹</button>
                   <select id="twmStandSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
                   <button id="twmStandNext" type="button" class="control-btn" title="Next stand">›</button>
+                </div>
+                <div style="font-size:11px; display:flex; align-items:center; gap:4px;">
+                  <span>Pass</span>
+                  <button id="twmPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                  <select id="twmPassSelect" style="font-size:11px; padding:4px 6px; border:1px solid var(--color-border); border-radius:6px; background:white; cursor:pointer;"></select>
+                  <button id="twmPassNext" type="button" class="control-btn" title="Next pass">›</button>
                 </div>
               </div>
               <div class="twm-compact-toolbar" style="flex:1; display:flex; gap:6px; justify-content:center; flex-wrap:wrap;">
@@ -278,6 +284,7 @@
                 <button id="twmP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle heatmap smoothing">P1</button>
                 <button id="twmHoverMode" type="button" class="help-btn" data-compact-toggle title="Toggle hover live update">H</button>
                 <button id="twmXAxisMode" type="button" class="help-btn" data-compact-toggle title="Toggle X-axis between segment index and position">X</button>
+                <button id="twmSyncBtn" type="button" class="help-btn" data-compact-toggle title="Synchronize stand with current pass">S</button>
                 <button id="twmInheritanceLine" type="button" class="help-btn" data-compact-toggle title="Toggle inheritance segment marker">A</button>
                 <button id="twmCrossSectionLine" type="button" class="help-btn" data-compact-toggle title="Toggle cross-section marker line">BL</button>
               </div>
