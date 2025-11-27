@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Roll shift visualizer</title>
+    <script type="module" crossorigin src="/primetals/assets/crownvis-BXlYr9FY.js"></script>
+    <link rel="modulepreload" crossorigin href="/primetals/assets/navigation-B7fLjyHe.js">
+    <link rel="modulepreload" crossorigin href="/primetals/assets/help-DZQAhnPH.js">
+    <link rel="stylesheet" crossorigin href="/primetals/assets/navigation-BrK1exYd.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel card panel--split">
+        <div class="panel-left">
+          <!-- IMPORTANT: Plotly uses a DIV, not SVG -->
+          <div id="plot"></div>
+
+          <div class="controls card controls--bottom">
+            <div class="row row--compact">
+              <label for="hshift">Horizontal Shift (m)</label>
+              <input id="hshift" type="range" min="-0.4" max="0.4" step="0.001" />
+            </div>
+            <div class="row row--compact">
+              <label for="vshift">Vertical shift (m)</label>
+              <input id="vshift" type="range" min="-0.001" max="0.001" step="0.00001" />
+            </div>
+
+            <div class="meta">
+              <span class="badge" id="hbadge">HShift = <strong id="hshiftMM" >0.00</strong> mm</span>
+              <span class="badge" id="vbadge">VShift = <strong id="vshiftMM">0.00</strong> mm</span>
+              <span class="badge" id="profileFormula">Induced profile = <strong id="profileVal">—</strong> µm</span>
+              <span class="badge">x ∈ [−1, 1], N = <span id="npts"></span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="coeffs card">
+          <div class="coeffs-header">
+            <h2 class="title">Coefficients</h2>
+            <div class="dropdown">
+              <button id="coeffDropdownBtn" class="dropdown-btn">Select ▼</button>
+              <div id="coeffDropdownMenu" class="dropdown-menu">
+                <button class="dropdown-item" data-type="Polynomial">Polynomial</button>
+                <button class="dropdown-item" data-type="SmartCrown">SmartCrown</button>
+                <button class="dropdown-item" data-type="Tapered">Tapered</button>
+              </div>
+            </div>
+          </div>
+          <div class="coeff">
+            <label for="a1">a₁ (linear)</label>
+            <input id="a1" type="text" inputmode="decimal" />
+          </div>
+          <div class="coeff">
+            <label for="a2">a₂ (quadratic)</label>
+            <input id="a2" type="text" inputmode="decimal" />
+          </div>
+          <div class="coeff">
+            <label for="a3">a₃ (cubic)</label>
+            <input id="a3" type="text" inputmode="decimal" />
+          </div>
+          <div class="coeff">
+            <label for="a4">a₄ (quartic)</label>
+            <input id="a4" type="text" inputmode="decimal" />
+          </div>
+          <div class="help-btn-wrap">
+            <button id="flipPairBtn" type="button" class="help-btn" title="Flip OS-DS">Flip</button>
+            <button id="resetCoeffsBtn" type="button" class="help-btn" title="Reset coefficients to session start">Reset</button>
+            <button id="tokenCoeffsBtn" type="button" class="help-btn" title="Reset to hardcoded defaults">Default</button>
+          </div>
+          <div class="help-btn-wrap toggles-row">
+            <label class="toggle-label">
+              <input id="fixShiftChk" type="checkbox" title="Keep current shift when editing coefficients"/> Fix H-shift
+            </label>
+            <label class="toggle-label">
+              <input id="fixVShiftChk" type="checkbox" checked title="Keep current vertical shift when editing coefficients"/> Fix V-shift
+            </label>
+            <label class="toggle-label">
+              <input id="mirrorToggleChk" type="checkbox" checked title="Show mirrored fish, fills & diff curve"/> Fish mode
+            </label>
+          </div>
+          <div class="poly-plot-wrap">
+            <h3 class="mini-title">Diameter Top Roll (m)</h3>
+            <div id="polyPlot"></div>
+          </div>
+          <div class="help-btn-wrap">
+            <button id="helpBtn" type="button" class="help-btn" title="Usage & formulas">Usage / Formulas</button>
+          </div>
+        </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <label class="debug-toggle"><input id="darkToggle" type="checkbox" /> Dark mode</label>
+      <label class="debug-toggle"><input id="debugToggle" type="checkbox" /> Bogdan's layer</label>
+    </footer>
+
+  </body>
+  </html>
