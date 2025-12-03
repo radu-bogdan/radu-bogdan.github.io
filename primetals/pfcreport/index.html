@@ -6,7 +6,7 @@
   <title>Pfc Report Analysis</title>
   <meta name="theme-color" content="#0d1117" />
   <!-- Import Flatpickr locally first, then main app -->
-  <script type="module" crossorigin src="./assets/index-BDmhrS8I.js"></script>
+  <script type="module" crossorigin src="./assets/index-l6sJH5-_.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Cxq8yBD6.css">
 </head>
 <body>
@@ -70,6 +70,12 @@
               <button id="pfcSeqToggleBtn" type="button" class="help-btn" title="Toggle X-axis: Time vs Sequential">T</button>
               <button id="pfcColorWheelBtn" type="button" class="help-btn" title="Cycle colors for all active signals">C</button>
               <button id="pfcLineModeBtn" type="button" class="help-btn" title="Toggle line (L) vs dots (D) mode">L</button>
+              <label style="display:flex; align-items:center; gap:4px; font-size:11px; color:var(--color-muted);">
+                UTC Offset
+                <select id="pfcUtcOffsetSelect" style="padding:2px 4px; font-size:11px; border-radius:4px; border:1px solid var(--color-border);">
+                  <option value="0">+0h</option>
+                </select>
+              </label>
             </div>
           </div>
           <div class="controls-group" id="pfcTimeFilterGroup">
@@ -87,6 +93,14 @@
           <div class="plot-card" id="pfcLinePlotCard">
             <h3 class="plot-title" style="margin:0 0 4px 0;">LINE PLOTS</h3>
             <div class="plot-content" id="pfcLinePlot"></div>
+          </div>
+          <div class="plot-card" id="pfcCenterWCrownCard">
+            <h3 class="plot-title" style="margin:0 0 4px 0;">WEAR CROWN</h3>
+          <div class="plot-content" id="pfcCenterWCrownPlot" style="height:220px; min-height:190px;"></div>
+          </div>
+          <div class="plot-card" id="pfcCenterTCrownCard">
+            <h3 class="plot-title" style="margin:0 0 4px 0;">THERMAL CROWN</h3>
+          <div class="plot-content" id="pfcCenterTCrownPlot" style="height:220px; min-height:190px;"></div>
           </div>
           <div class="plot-pair-row">
             <div class="plot-card half" id="pfcHistCard">
