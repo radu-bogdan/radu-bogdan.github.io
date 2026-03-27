@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
-  <title>DMM Data Viewer</title>
+  <title>DMM Data Viewer</title>
   <meta name="theme-color" content="#ffffff" />
-  <script type="module" crossorigin src="./assets/index-d90Tx8i4.js"></script>
+  <script type="module" crossorigin src="./assets/index-CvZZ0ev5.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/plotly-CqWVcy5J.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-LSOrbs8l.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-W6xUTHXF.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
         <div class="menu-bar hidden" id="menuBar">
           <!-- Left: Plate chooser -->
           <div class="menu-section menu-left flex-center gap-2">
-            <img id="appLogo" src="./assets/logo_circle-Do1AEmZq.svg" alt="Logo" class="app-logo" />
+            <img id="appLogo" src="./assets/logo_circle-1xSRGLIZ.svg" alt="Logo" class="app-logo" />
             <span class="menu-label">PLATE</span>
             <div class="picker-group">
               <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
@@ -61,8 +61,8 @@
               <button id="toggleTwm" class="menu-toggle-btn" data-target="twmCard">
                 <span>Twm</span>
               </button>
-              <button id="toggleBmRes" class="menu-toggle-btn" data-target="bmResCard">
-                <span>BmRes</span>
+              <button id="toggleCalcPlot" class="menu-toggle-btn" data-target="calcPlotCard">
+                <span>Contour</span>
               </button>
               <button id="toggleChemistry" class="menu-toggle-btn" data-target="chemistryCard">
                 <span>Chemistry</span>
@@ -99,6 +99,7 @@
             <div class="flex gap-2">
               <button id="expandCurrentBtn" type="button" class="help-btn">Expand All</button>
               <button id="collapseCurrentBtn" type="button" class="help-btn">Collapse All</button>
+              <button id="exportPlateBtn" type="button" class="help-btn" title="Export plate as flat dot-path text file">Export</button>
             </div>
           </div>
           <div id="current" class="json-tree"></div>
@@ -214,7 +215,7 @@
             <h3 class="plot-title m-0">CHEMISTRY COMPOSITION</h3>
             <div class="flex flex-1 justify-center">
               <button id="chemistryChartToggle" type="button" class="help-btn" data-compact-toggle
-                title="Toggle between Pie (P) and Bar (B) chart">P</button>
+                title="Toggle between Pie (P), Bar (B), and Table (T) view">P</button>
             </div>
             <span id="chemistryTotal" class="text-sm invisible"></span>
           </div>
@@ -379,19 +380,26 @@
           <div id="twmPlotContainer" class="plot-container"></div>
         </div>
 
-        <div class="plot-card hidden" id="bmResCard">
+        <div class="plot-card hidden" id="calcPlotCard">
           <div class="card-header-simple mb-3">
-            <h3 class="plot-title">BM RESULTS</h3>
+            <h3 class="plot-title">CONTOUR</h3>
             <div class="flex-center gap-5">
               <div class="picker-group">
                 <span>Pass</span>
-                <button id="bmResPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
-                <select id="bmResPassSelect" class="form-select"></select>
-                <button id="bmResPassNext" type="button" class="control-btn" title="Next pass">›</button>
+                <button id="calcPlotPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                <select id="calcPlotPassSelect" class="form-select"></select>
+                <button id="calcPlotPassNext" type="button" class="control-btn" title="Next pass">›</button>
+              </div>
+              <div class="picker-group">
+                <span>Calc</span>
+                <select id="contourCalcSelect" class="form-select">
+                  <option value="post">Post</option>
+                  <option value="pre">Pre</option>
+                </select>
               </div>
             </div>
           </div>
-          <div id="bmResPlotContainer" class="plot-container"></div>
+          <div id="calcPlotContainer" class="plot-container"></div>
         </div>
 
         <div class="plot-card hidden" id="setpointsCard">
@@ -405,9 +413,16 @@
           <div class="plot-card hidden" id="analysisCard">
             <div id="analysisHeader" class="flex-center gap-5 mb-3 text-sm text-muted" style="min-height: 20px">
               <div id="analysisStats" class="flex-center gap-3"></div>
-              <button id="analysisLogToggle" class="help-btn strikeout ml-auto" data-compact-toggle title="Toggle Logarithmic Scale">Log</button>
+              <button id="analysisEntryToggle" class="help-btn strikeout ml-auto" data-compact-toggle title="Show entry profile instead of exit profile">Entry</button>
+              <button id="analysisOffsetToggle" class="help-btn strikeout" data-compact-toggle title="Show optimizer-internal values (add offset4InternalTarget back)">Offset</button>
+              <button id="analysisLogToggle" class="help-btn strikeout" data-compact-toggle title="Toggle Logarithmic Scale">Log</button>
             </div>
             <div id="analysisContainer" class="plot-container"></div>
+            <div id="analysisTable" class="analysis-table-wrapper"></div>
+            <details id="analysisDocsSection" class="analysis-docs">
+              <summary class="analysis-docs__toggle">How these graphs are computed</summary>
+              <div id="analysisDocsContent" class="analysis-docs__content"></div>
+            </details>
         </div>
       </div>
     </section>
@@ -417,7 +432,7 @@
   </footer>
   <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">
     Drop DMM file(s) to load
-  </div>
+  </div>
 </body>
 
 </html>
