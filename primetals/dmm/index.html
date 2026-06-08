@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
   <title>DMM Data Viewer</title>
   <meta name="theme-color" content="#ffffff" />
-  <script type="module" crossorigin src="./assets/index-BK7ur6M2.js"></script>
+  <script type="module" crossorigin src="./assets/index-CovSMst5.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/plotly-CqWVcy5J.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-W6xUTHXF.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-ng96VgIb.css">
 </head>
 
 <body>
@@ -52,11 +52,17 @@
               <button id="toggleProfile" class="menu-toggle-btn" data-target="profileCard">
                 <span>Profile</span>
               </button>
+              <button id="toggleThreePoint" class="menu-toggle-btn" data-target="threePointCard">
+                <span>ThreePoint</span>
+              </button>
               <button id="toggleRoll" class="menu-toggle-btn" data-target="rollCard">
                 <span>Roll</span>
               </button>
               <button id="toggleSegments" class="menu-toggle-btn" data-target="segmentsCard">
                 <span>Segments</span>
+              </button>
+              <button id="togglePoints" class="menu-toggle-btn" data-target="pointsCard">
+                <span>Points</span>
               </button>
               <button id="toggleTwm" class="menu-toggle-btn" data-target="twmCard">
                 <span>Twm</span>
@@ -210,6 +216,27 @@
           </div>
         </div>
 
+        <div class="plot-card hidden" id="threePointCard">
+          <div class="card-header-simple mb-3">
+            <h3 class="plot-title m-0 flex-none">THREE-POINT PROFILE</h3>
+            <div class="picker-row">
+              <div class="picker-group">
+                <span>Pass</span>
+                <button id="threePointPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                <select id="threePointPassSelect" class="form-select"></select>
+                <button id="threePointPassNext" type="button" class="control-btn" title="Next pass">›</button>
+              </div>
+            </div>
+            <div class="toolbar-compact">
+              <button id="threePointHoverMode" type="button" class="help-btn" data-compact-toggle
+                title="Toggle hover live update">H</button>
+              <button id="threePointCrossSectionLine" type="button" class="help-btn" data-compact-toggle
+                title="Toggle cross-section marker line">BL</button>
+            </div>
+          </div>
+          <div id="threePointPlotContainer" class="plot-container"></div>
+        </div>
+
         <div class="plot-card hidden" id="chemistryCard">
           <div class="card-header mb-3 gap-5">
             <h3 class="plot-title m-0">CHEMISTRY COMPOSITION</h3>
@@ -336,6 +363,76 @@
                 <div id="segmentsConsoleOutput" class="console-output"></div>
                 <form id="segmentsConsoleForm" class="flex gap-1 mt-2">
                   <input id="segmentsConsoleInput" type="text" class="form-input-mono flex-1" autocomplete="off" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plot-card hidden" id="pointsCard">
+          <div class="card-header-simple mb-3">
+            <h3 class="plot-title m-0 flex-none">POINTS DATA</h3>
+            <div id="pointsHeaderPickers" class="picker-row">
+              <div class="picker-group">
+                <span>Pass</span>
+                <button id="pointsPassPrev" type="button" class="control-btn" title="Previous pass">‹</button>
+                <select id="pointsPassSelect" class="form-select"></select>
+                <button id="pointsPassNext" type="button" class="control-btn" title="Next pass">›</button>
+              </div>
+            </div>
+            <div id="pointsHeaderControls" class="flex-center gap-2 flex-1 justify-center">
+              <button id="pointsSourceBtn" type="button" class="help-btn" data-compact-toggle
+                title="Toggle between preCalc and postCalc points">Pre</button>
+              <button id="pointsXAxisBtn" type="button" class="help-btn" data-compact-toggle
+                title="Cycle X-axis: index → length → time">X:i</button>
+              <button id="pointsCopyBtn" type="button" class="help-btn" data-compact-toggle
+                title="Copy signals to clipboard">C</button>
+            </div>
+            <button id="pointsSpecialBtn" type="button" class="help-btn ml-auto" data-compact-toggle
+              title="Toggle multi-pass special layer">SP</button>
+          </div>
+          <div id="pointsContainer" class="plot-container-row mt-5 items-stretch">
+            <div id="pointsSignalPanel" class="signal-panel signal-panel-container">
+              <div class="signal-search-group">
+                <input type="text" id="pointsSignalSearch" placeholder="Search signals..." class="form-input w-full" />
+              </div>
+
+              <div class="signal-section">
+                <div class="flex-between mb-1">
+                  <span class="section-label">ACTIVE SIGNALS</span>
+                  <button id="pointsClearAllSignals" type="button" class="help-btn text-xs p-2" title="Clear all signals">Clear</button>
+                </div>
+                <div id="pointsSelectedSignals" class="selected-signals selected-signals-container">
+                  <span id="pointsNoSignals" class="text-sm text-secondary items-center">No signals selected</span>
+                </div>
+              </div>
+
+              <div class="signal-section flex-1 flex-col min-h-0">
+                <div class="flex-between mb-1 gap-2">
+                  <span class="section-label">AVAILABLE SIGNALS</span>
+                  <div class="flex-center gap-1">
+                    <select id="pointsPresetSelect" class="form-select-sm">
+                      <option value="">Presets</option>
+                    </select>
+                    <button id="pointsSelectAllSignals" type="button" class="help-btn text-xs p-2" title="Select all">All</button>
+                    <button id="pointsDeselectAllSignals" type="button" class="help-btn text-xs p-2" title="Deselect all">None</button>
+                  </div>
+                </div>
+                <div id="pointsSignalList" class="signal-list signal-list-container">
+                </div>
+              </div>
+            </div>
+
+            <div id="pointsPlotColumn" class="flex-1 flex-col gap-5 min-w-0 items-stretch">
+              <div id="pointsPlotContainer" class="flex-none flex-col"></div>
+              <div id="pointsConsolePanel" class="console-panel">
+                <div class="flex-between">
+                  <span class="section-label tracking-wide">SIGNAL CONSOLE</span>
+                  <button id="pointsConsoleHelp" type="button" class="help-btn text-xs p-2">Help</button>
+                </div>
+                <div id="pointsConsoleOutput" class="console-output"></div>
+                <form id="pointsConsoleForm" class="flex gap-1 mt-2">
+                  <input id="pointsConsoleInput" type="text" class="form-input-mono flex-1" autocomplete="off" />
                 </form>
               </div>
             </div>
