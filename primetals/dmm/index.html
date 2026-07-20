@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
   <title>DMM Data Viewer</title>
   <meta name="theme-color" content="#ffffff" />
-  <script type="module" crossorigin src="./assets/index-Dfy2ulOJ.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DsWc3KQx.css">
+  <script type="module" crossorigin src="./assets/index-BqwTE5ah.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Ea0TNDQz.css">
 </head>
 
 <body>
@@ -166,8 +166,8 @@
             <h3 class="plot-title m-0 flex-none">PROFILE MEASUREMENTS</h3>
             <div class="profile-compact-toolbar toolbar-compact">
               <button id="profileCenterlineMode" type="button" class="help-btn" data-compact-toggle
-                title="Toggle centerline / heatmap">
-                H
+                title="Show/hide centerline plot below the heatmap">
+                CL
               </button>
               <button id="profileP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle P0 / P1">
                 P1
@@ -516,18 +516,32 @@
         </div>
 
           <div class="plot-card hidden" id="analysisCard">
-            <div id="analysisHeader" class="flex-center gap-5 mb-3 text-sm text-muted" style="min-height: 20px">
-              <div id="analysisStats" class="flex-center gap-3"></div>
-              <button id="analysisEntryToggle" class="help-btn strikeout ml-auto" data-compact-toggle title="Show entry profile instead of exit profile">Entry</button>
-              <button id="analysisOffsetToggle" class="help-btn strikeout" data-compact-toggle title="Show optimizer-internal values (add offset4InternalTarget back)">Offset</button>
-              <button id="analysisLogToggle" class="help-btn strikeout" data-compact-toggle title="Toggle Logarithmic Scale">Log</button>
+            <!-- Sub-tab bar (SubTabs primitive injects menu-style buttons here) -->
+            <div id="analysisSubTabs"></div>
+
+            <!-- Profile sub-tab: the existing profile / thickness schedule view -->
+            <div id="analysisProfilePanel">
+              <div id="analysisHeader" class="flex-center gap-5 mb-3 text-sm text-muted" style="min-height: 20px">
+                <div id="analysisStats" class="flex-center gap-3"></div>
+                <button id="analysisEntryToggle" class="help-btn strikeout ml-auto" data-compact-toggle title="Show entry profile instead of exit profile">Entry</button>
+                <button id="analysisOffsetToggle" class="help-btn strikeout" data-compact-toggle title="Show optimizer-internal values (add offset4InternalTarget back)">Offset</button>
+                <button id="analysisLogToggle" class="help-btn strikeout" data-compact-toggle title="Toggle Logarithmic Scale">Log</button>
+              </div>
+              <div id="analysisContainer" class="plot-container"></div>
+              <div id="analysisTable" class="analysis-table-wrapper"></div>
+              <details id="analysisDocsSection" class="analysis-docs">
+                <summary class="analysis-docs__toggle">How these graphs are computed</summary>
+                <div id="analysisDocsContent" class="analysis-docs__content"></div>
+              </details>
             </div>
-            <div id="analysisContainer" class="plot-container"></div>
-            <div id="analysisTable" class="analysis-table-wrapper"></div>
-            <details id="analysisDocsSection" class="analysis-docs">
-              <summary class="analysis-docs__toggle">How these graphs are computed</summary>
-              <div id="analysisDocsContent" class="analysis-docs__content"></div>
-            </details>
+
+            <!-- Screwdown sub-tab: placeholder for the linearization view -->
+            <div id="analysisScrewdownPanel" class="hidden">
+              <div class="text-muted text-sm" style="padding: 48px 24px; text-align: center;">
+                <p><strong>Screwdown &amp; Linearization</strong></p>
+                <p>Per-pass screwdown decomposition and the AGC linearization-failure view will live here.</p>
+              </div>
+            </div>
         </div>
       </div>
     </section>
