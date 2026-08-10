@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
   <title>DMM Data Viewer</title>
   <meta name="theme-color" content="#ffffff" />
-  <script type="module" crossorigin src="./assets/index-BqwTE5ah.js"></script>
+  <script type="module" crossorigin src="./assets/index-RiLguS1w.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-Ea0TNDQz.css">
 </head>
 
@@ -31,7 +31,7 @@
           <div class="menu-section menu-left flex-center gap-2">
             <img id="appLogo" src="./assets/logoCFOpt-CULBf9Ea.svg" alt="CFOpt" class="app-logo" />
             <span class="menu-divider" aria-hidden="true"></span>
-            <span class="menu-label">PLATE</span>
+            <span id="plateLabel" class="menu-label" title="Ctrl/Cmd-click to copy plate name">PLATE</span>
             <div class="picker-group">
               <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
               <select id="plateDropdown" class="menu-dropdown form-select"></select>
@@ -171,6 +171,10 @@
               </button>
               <button id="profileP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle P0 / P1">
                 P1
+              </button>
+              <button id="profileNormalizeMode" type="button" class="help-btn" data-compact-toggle
+                title="Normalize heatmap">
+                N
               </button>
               <button id="profileShowGrid" type="button" class="help-btn" data-compact-toggle title="Toggle grid">
                 G

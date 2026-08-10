@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
   <title>DMM Data Viewer</title>
   <meta name="theme-color" content="#ffffff" />
-  <script type="module" crossorigin src="./assets/index-CovSMst5.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/plotly-CqWVcy5J.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-ng96VgIb.css">
+  <script type="module" crossorigin src="./assets/index-BqwTE5ah.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Ea0TNDQz.css">
 </head>
 
 <body>
@@ -30,7 +29,8 @@
         <div class="menu-bar hidden" id="menuBar">
           <!-- Left: Plate chooser -->
           <div class="menu-section menu-left flex-center gap-2">
-            <img id="appLogo" src="./assets/logo_circle-Do1AEmZq.svg" alt="Logo" class="app-logo" />
+            <img id="appLogo" src="./assets/logoCFOpt-CULBf9Ea.svg" alt="CFOpt" class="app-logo" />
+            <span class="menu-divider" aria-hidden="true"></span>
             <span class="menu-label">PLATE</span>
             <div class="picker-group">
               <button id="platePrev" type="button" class="control-btn" title="Previous plate">‹</button>
@@ -96,16 +96,11 @@
         <div id="meta" class="meta hidden"></div>
 
         <div class="plot-card hidden" id="currentCard">
-          <div class="card-header mb-3">
+          <div class="card-header card-header-center mb-3">
             <h3 class="plot-title">CURRENT PLATE</h3>
             <div class="json-search-container">
               <input id="jsonSearchInput" type="text" class="form-input-sm" placeholder="Search keys/values..." />
               <div id="jsonSearchResults" class="json-search-results hidden"></div>
-            </div>
-            <div class="flex gap-2">
-              <button id="expandCurrentBtn" type="button" class="help-btn">Expand All</button>
-              <button id="collapseCurrentBtn" type="button" class="help-btn">Collapse All</button>
-              <button id="exportPlateBtn" type="button" class="help-btn" title="Export plate as flat dot-path text file">Export</button>
             </div>
           </div>
           <div id="current" class="json-tree"></div>
@@ -171,8 +166,8 @@
             <h3 class="plot-title m-0 flex-none">PROFILE MEASUREMENTS</h3>
             <div class="profile-compact-toolbar toolbar-compact">
               <button id="profileCenterlineMode" type="button" class="help-btn" data-compact-toggle
-                title="Toggle centerline / heatmap">
-                H
+                title="Show/hide centerline plot below the heatmap">
+                CL
               </button>
               <button id="profileP0Mode" type="button" class="help-btn" data-compact-toggle title="Toggle P0 / P1">
                 P1
@@ -199,6 +194,10 @@
               <button id="profileStatsMode" type="button" class="help-btn" data-compact-toggle
                 title="Toggle stats visibility">
                 S
+              </button>
+              <button id="profileBarrelUnitsMode" type="button" class="help-btn" data-compact-toggle
+                title="Toggle position: Absolute (mm) ⟷ Relative (-)">
+                A
               </button>
               <button id="profileCrossSectionLine" type="button" class="help-btn" data-compact-toggle
                 title="Toggle cross-section marker line">
@@ -494,6 +493,15 @@
                   <option value="pre">Pre</option>
                 </select>
               </div>
+              <div class="picker-group">
+                <span>Curves</span>
+                <select id="contourCurveSelect" class="form-select">
+                  <option value="main">Main</option>
+                  <option value="spline">Spline</option>
+                  <option value="polynomial">Polynomial</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
             </div>
           </div>
           <div id="calcPlotContainer" class="plot-container"></div>
@@ -508,24 +516,38 @@
         </div>
 
           <div class="plot-card hidden" id="analysisCard">
-            <div id="analysisHeader" class="flex-center gap-5 mb-3 text-sm text-muted" style="min-height: 20px">
-              <div id="analysisStats" class="flex-center gap-3"></div>
-              <button id="analysisEntryToggle" class="help-btn strikeout ml-auto" data-compact-toggle title="Show entry profile instead of exit profile">Entry</button>
-              <button id="analysisOffsetToggle" class="help-btn strikeout" data-compact-toggle title="Show optimizer-internal values (add offset4InternalTarget back)">Offset</button>
-              <button id="analysisLogToggle" class="help-btn strikeout" data-compact-toggle title="Toggle Logarithmic Scale">Log</button>
+            <!-- Sub-tab bar (SubTabs primitive injects menu-style buttons here) -->
+            <div id="analysisSubTabs"></div>
+
+            <!-- Profile sub-tab: the existing profile / thickness schedule view -->
+            <div id="analysisProfilePanel">
+              <div id="analysisHeader" class="flex-center gap-5 mb-3 text-sm text-muted" style="min-height: 20px">
+                <div id="analysisStats" class="flex-center gap-3"></div>
+                <button id="analysisEntryToggle" class="help-btn strikeout ml-auto" data-compact-toggle title="Show entry profile instead of exit profile">Entry</button>
+                <button id="analysisOffsetToggle" class="help-btn strikeout" data-compact-toggle title="Show optimizer-internal values (add offset4InternalTarget back)">Offset</button>
+                <button id="analysisLogToggle" class="help-btn strikeout" data-compact-toggle title="Toggle Logarithmic Scale">Log</button>
+              </div>
+              <div id="analysisContainer" class="plot-container"></div>
+              <div id="analysisTable" class="analysis-table-wrapper"></div>
+              <details id="analysisDocsSection" class="analysis-docs">
+                <summary class="analysis-docs__toggle">How these graphs are computed</summary>
+                <div id="analysisDocsContent" class="analysis-docs__content"></div>
+              </details>
             </div>
-            <div id="analysisContainer" class="plot-container"></div>
-            <div id="analysisTable" class="analysis-table-wrapper"></div>
-            <details id="analysisDocsSection" class="analysis-docs">
-              <summary class="analysis-docs__toggle">How these graphs are computed</summary>
-              <div id="analysisDocsContent" class="analysis-docs__content"></div>
-            </details>
+
+            <!-- Screwdown sub-tab: placeholder for the linearization view -->
+            <div id="analysisScrewdownPanel" class="hidden">
+              <div class="text-muted text-sm" style="padding: 48px 24px; text-align: center;">
+                <p><strong>Screwdown &amp; Linearization</strong></p>
+                <p>Per-pass screwdown decomposition and the AGC linearization-failure view will live here.</p>
+              </div>
+            </div>
         </div>
       </div>
     </section>
   </main>
   <footer class="app-footer">
-    <small>DMM Data Viewer • Bogdan Radu 2025</small>
+    <small>DMM Data Viewer • Bogdan Radu 2026</small>
   </footer>
   <div id="globalDropOverlay" class="global-drop-overlay" aria-hidden="true">
     Drop DMM file(s) to load
